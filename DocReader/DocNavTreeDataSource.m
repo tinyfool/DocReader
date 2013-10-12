@@ -1,0 +1,57 @@
+//
+//  DocNavTreeDataSource.m
+//  DocReader
+//
+//  Created by pei hao on 13-10-11.
+//  Copyright (c) 2013年 pei hao. All rights reserved.
+//
+
+#import "DocNavTreeDataSource.h"
+#import "DocNavTreeNode.h"
+#import "DocNavTreeRootNode.h"
+
+@implementation DocNavTreeDataSource
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+    
+    if (item==nil)
+        return 1;
+    else
+        return [(DocNavTreeNode*)item numberOfChildren];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+
+    if (item == nil)
+        return YES;
+
+    if ([(DocNavTreeNode*)item numberOfChildren] != -1)
+        return YES;
+    
+    return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+    
+    if (item == nil)
+        return [DocNavTreeRootNode rootItem];
+
+    return [(DocNavTreeNode *)item childAtIndex:index];
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
+    
+    DocNavTreeNode* node = item;
+    if (node == nil)
+        return @"文档库";
+    
+    return [item label];
+}
+
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
+
+    return NO;
+}
+
+@end
