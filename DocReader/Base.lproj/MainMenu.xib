@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4511"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="3336"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -660,24 +661,24 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="0np-rl-QDZ">
-                                <rect key="frame" x="0.0" y="0.0" width="216" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="184" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyv-5k-Vcx">
-                                        <rect key="frame" x="0.0" y="0.0" width="216" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="498"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" id="68L-3e-mqL">
-                                            <rect key="frame" x="1" y="1" width="214" height="496"/>
+                                            <rect key="frame" x="1" y="1" width="182" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="EOF-6H-51f" id="OD1-DO-F1a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="214" height="496"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="182" height="496"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="211" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
+                                                        <tableColumn width="179" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -693,6 +694,7 @@
                                                     </tableColumns>
                                                     <connections>
                                                         <outlet property="dataSource" destination="cJE-qd-r65" id="fTD-Py-zEx"/>
+                                                        <outlet property="delegate" destination="cJE-qd-r65" id="aBR-Ko-3Qh"/>
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
@@ -715,9 +717,22 @@
                                     <constraint firstAttribute="trailing" secondItem="Vyv-5k-Vcx" secondAttribute="trailing" id="rL2-3q-SDy"/>
                                 </constraints>
                             </customView>
-                            <customView fixedFrame="YES" id="eaI-0t-VeQ">
-                                <rect key="frame" x="226" y="0.0" width="441" height="498"/>
+                            <customView id="eaI-0t-VeQ">
+                                <rect key="frame" x="194" y="0.0" width="473" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="37X-St-1GJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="473" height="498"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                                    </webView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="37X-St-1GJ" firstAttribute="leading" secondItem="eaI-0t-VeQ" secondAttribute="leading" id="RJL-YW-S89"/>
+                                    <constraint firstItem="37X-St-1GJ" firstAttribute="top" secondItem="eaI-0t-VeQ" secondAttribute="top" id="Uv7-qi-q7U"/>
+                                    <constraint firstAttribute="bottom" secondItem="37X-St-1GJ" secondAttribute="bottom" id="Wvx-r0-qOm"/>
+                                    <constraint firstAttribute="trailing" secondItem="37X-St-1GJ" secondAttribute="trailing" id="o2I-GR-Zzd"/>
+                                </constraints>
                             </customView>
                         </subviews>
                         <holdingPriorities>
@@ -740,6 +755,15 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <customObject id="cJE-qd-r65" userLabel="DocNavTreeDatasource" customClass="DocNavTreeDataSource"/>
+        <customObject id="cJE-qd-r65" userLabel="DocNavTreeDatasource" customClass="DocNavTreeDataSource">
+            <connections>
+                <outlet property="docWebview" destination="37X-St-1GJ" id="Y7e-k8-1Yu"/>
+            </connections>
+        </customObject>
+        <webView id="3Ln-pt-5jM">
+            <rect key="frame" x="0.0" y="0.0" width="254" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+        </webView>
     </objects>
 </document>

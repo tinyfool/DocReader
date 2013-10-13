@@ -10,6 +10,8 @@
 #import "DocNavTreeDocsetNode.h"
 
 @implementation DocNavTreeTopicNode
+@synthesize info;
+
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andInfo:(id)aInfo andDocsetNode:(DocNavTreeDocsetNode*)aDocset {
 
     if (self = [super initWithPath:path parent:aParent]) {
@@ -19,8 +21,6 @@
         docset = aDocset;
     }
     return self;
-
-    
     
 }
 
@@ -46,5 +46,17 @@
 
     return children;
 }
-
+- (NSURL*)Url {
+    
+    NSString* path = [info objectForKey:@"ZKPATH"];
+    NSString* pk = [info objectForKey:@"Z_PK"];
+    if (!path) {
+        
+        NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODEURL WHERE ZNODE = %@",pk];
+        NSArray* results = [docset runSql:sql];
+        path = [[results objectAtIndex:0] objectForKey:@"ZPATH"];
+    }
+    NSString* fullPath = [[[srcPath stringByAppendingPathComponent:[docset relativePath]] stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
+    return [NSURL URLWithString:fullPath];
+}
 @end

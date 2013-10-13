@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD127776180A6EC800246E14 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD127775180A6EC800246E14 /* WebKit.framework */; };
 		BD165BB11807CA4A0013913A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD165BB01807CA4A0013913A /* Cocoa.framework */; };
 		BD165BBB1807CA4A0013913A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD165BB91807CA4A0013913A /* InfoPlist.strings */; };
 		BD165BBD1807CA4A0013913A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD165BBC1807CA4A0013913A /* main.m */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD127775180A6EC800246E14 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		BD165BAD1807CA4A0013913A /* DocReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD165BB01807CA4A0013913A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BD165BB31807CA4A0013913A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD127776180A6EC800246E14 /* WebKit.framework in Frameworks */,
 				BD4721FA1808D8E300C00FA0 /* libsqlite3.dylib in Frameworks */,
 				BD165BB11807CA4A0013913A /* Cocoa.framework in Frameworks */,
 			);
@@ -115,6 +118,7 @@
 		BD165BAF1807CA4A0013913A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD127775180A6EC800246E14 /* WebKit.framework */,
 				BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */,
 				BD165BB01807CA4A0013913A /* Cocoa.framework */,
 				BD165BD21807CA4A0013913A /* XCTest.framework */,

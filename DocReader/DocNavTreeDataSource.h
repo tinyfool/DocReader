@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <WebKit/WebKit.h>
+@class DocNavTreeTopicNode;
 @interface DocNavTreeDataSource : NSObject
 
+@property (weak) IBOutlet WebView *docWebview;
+
+-(NSString*)pathForTopic:(DocNavTreeTopicNode*)topic;
 @end

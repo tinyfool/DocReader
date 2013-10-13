@@ -13,5 +13,9 @@
     NSDictionary* info;
     DocNavTreeDocsetNode* docset;
 }
+
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)parent andInfo:(id)aInfo andDocsetNode:(DocNavTreeDocsetNode*)aDocset;
+- (NSURL*)Url;
+
+@property (readonly) NSDictionary* info;
 @end

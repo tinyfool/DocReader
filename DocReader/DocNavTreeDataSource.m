@@ -9,6 +9,7 @@
 #import "DocNavTreeDataSource.h"
 #import "DocNavTreeNode.h"
 #import "DocNavTreeRootNode.h"
+#import "DocNavTreeTopicNode.h"
 
 @implementation DocNavTreeDataSource
 
@@ -48,10 +49,25 @@
     return [item label];
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
+
+    if ([[item class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
+        
+        DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
+        NSURL* url = [topic Url];
+        if (url) {
+            [[self.docWebview mainFrame]
+             loadRequest:
+             [NSURLRequest requestWithURL:url]];
+        }
+    }
+    return YES;
+}
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 
     return NO;
 }
+
 
 @end
