@@ -22,6 +22,7 @@
 		BD4721F21808615E00C00FA0 /* DocNavTreeRootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F11808615E00C00FA0 /* DocNavTreeRootNode.m */; };
 		BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F41808638A00C00FA0 /* DocNavTreeDocsetNode.m */; };
 		BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */; };
+		BD4721FA1808D8E300C00FA0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */; };
 		BD68E294180808E6005226B3 /* DocNavTreeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E293180808E6005226B3 /* DocNavTreeDataSource.m */; };
 		BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E29618080960005226B3 /* DocNavTreeNode.m */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		BD4721F41808638A00C00FA0 /* DocNavTreeDocsetNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeDocsetNode.m; sourceTree = "<group>"; };
 		BD4721F61808668600C00FA0 /* DocNavTreeTopicNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeTopicNode.h; sourceTree = "<group>"; };
 		BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeTopicNode.m; sourceTree = "<group>"; };
+		BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BD68E292180808E6005226B3 /* DocNavTreeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeDataSource.h; sourceTree = "<group>"; };
 		BD68E293180808E6005226B3 /* DocNavTreeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeDataSource.m; sourceTree = "<group>"; };
 		BD68E29518080960005226B3 /* DocNavTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeNode.h; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD4721FA1808D8E300C00FA0 /* libsqlite3.dylib in Frameworks */,
 				BD165BB11807CA4A0013913A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +115,7 @@
 		BD165BAF1807CA4A0013913A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */,
 				BD165BB01807CA4A0013913A /* Cocoa.framework */,
 				BD165BD21807CA4A0013913A /* XCTest.framework */,
 				BD165BB21807CA4A0013913A /* Other Frameworks */,
