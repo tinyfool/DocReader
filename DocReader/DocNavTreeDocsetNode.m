@@ -10,6 +10,7 @@
 #import "DocNavTreeTopicNode.h"
 
 @implementation DocNavTreeDocsetNode
+@synthesize docInfo;
 
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andInfo:(id)aInfo{
     

@@ -17,8 +17,10 @@
     sqlite3* dsidx_db;
 }
 
+@property (readonly) NSDictionary* docInfo;
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)parent andInfo:(id)aInfo;
 - (NSArray*)topicNodes:(DocNavTreeTopicNode*)aParent;
 - (sqlite3*) dsidx_db;
 - (NSArray*)runSql:(NSString*)sql;
+
 @end

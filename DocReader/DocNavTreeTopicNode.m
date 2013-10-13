@@ -46,6 +46,7 @@
 
     return children;
 }
+
 - (NSURL*)Url {
     
     NSString* path = [info objectForKey:@"ZKPATH"];
@@ -55,8 +56,17 @@
         NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODEURL WHERE ZNODE = %@",pk];
         NSArray* results = [docset runSql:sql];
         path = [[results objectAtIndex:0] objectForKey:@"ZPATH"];
+        if (!path) {
+            NSString* zbaseurl = [[results objectAtIndex:0] objectForKey:@"ZBASEURL"];
+            if (zbaseurl) {
+                return [NSURL URLWithString:zbaseurl];
+            }
+            else
+                return nil;
+        }
     }
     NSString* fullPath = [[[srcPath stringByAppendingPathComponent:[docset relativePath]] stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
+    
     return [NSURL URLWithString:fullPath];
 }
 @end
