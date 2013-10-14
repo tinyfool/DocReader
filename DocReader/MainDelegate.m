@@ -6,12 +6,12 @@
 //  Copyright (c) 2013年 pei hao. All rights reserved.
 //
 
-#import "DocNavTreeDataSource.h"
+#import "MainDelegate.h"
 #import "DocNavTreeNode.h"
 #import "DocNavTreeRootNode.h"
 #import "DocNavTreeTopicNode.h"
 
-@implementation DocNavTreeDataSource
+@implementation MainDelegate
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
@@ -69,5 +69,10 @@
     return NO;
 }
 
+- (IBAction)updateFilter:sender {
+
+    NSSearchField* searchField = (NSSearchField*) sender;
+    NSLog(@"%@",[searchField stringValue]);
+}
 
 @end

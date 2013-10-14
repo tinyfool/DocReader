@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4511"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="3336"/>
     </dependencies>
@@ -650,7 +651,7 @@
         <window title="DocReader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="667" height="498"/>
+            <rect key="contentRect" x="373" y="237" width="667" height="498"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="667" height="498"/>
@@ -724,7 +725,9 @@
                                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="37X-St-1GJ">
                                         <rect key="frame" x="0.0" y="0.0" width="473" height="498"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                            <nil key="identifier"/>
+                                        </webPreferences>
                                     </webView>
                                 </subviews>
                                 <constraints>
@@ -748,6 +751,39 @@
                     <constraint firstAttribute="trailing" secondItem="Xd1-gi-5l2" secondAttribute="trailing" id="wJc-yi-QFz"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="5EF1107A-D38B-46EC-8E72-58679F5684B2" displayMode="iconOnly" sizeMode="small" id="qWD-HB-RDv">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="IWP-Os-h69"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="aHx-oI-KAb"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="0hF-0P-ajw"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Du8-TH-fqz"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="vaf-N9-d2x"/>
+                    <toolbarItem implicitItemIdentifier="6FA6A222-F2E6-4B83-8387-7990658AC210" label="Custom View" paletteLabel="Custom View" id="Ftu-Jv-z1w">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="96" height="22"/>
+                        <size key="maxSize" width="1000" height="22"/>
+                        <searchField key="view" verticalHuggingPriority="750" id="WEc-6r-ESY">
+                            <rect key="frame" x="0.0" y="14" width="96" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="LoV-hd-QRn">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="updateFilter:" target="cJE-qd-r65" id="7JV-Ob-5Rw"/>
+                                </connections>
+                            </searchFieldCell>
+                        </searchField>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="Ftu-Jv-z1w"/>
+                    <toolbarItem reference="vaf-N9-d2x"/>
+                </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="cJE-qd-r65" id="RbH-WH-r4U"/>
+                </connections>
+            </toolbar>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
@@ -755,15 +791,10 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <customObject id="cJE-qd-r65" userLabel="DocNavTreeDatasource" customClass="DocNavTreeDataSource">
+        <customObject id="cJE-qd-r65" userLabel="MainDelegate" customClass="MainDelegate">
             <connections>
                 <outlet property="docWebview" destination="37X-St-1GJ" id="Y7e-k8-1Yu"/>
             </connections>
         </customObject>
-        <webView id="3Ln-pt-5jM">
-            <rect key="frame" x="0.0" y="0.0" width="254" height="200"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
-        </webView>
     </objects>
 </document>
