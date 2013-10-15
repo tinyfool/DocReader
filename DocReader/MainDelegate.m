@@ -85,7 +85,7 @@
     if ([[item class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
         
         DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
-        NSURL* url = [topic Url];
+        NSURL* url = [NSURL fileURLWithPath:topic.Url];
         if (url) {
             [[self.docWebview mainFrame]
              loadRequest:

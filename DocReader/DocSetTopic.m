@@ -51,6 +51,6 @@
     }
     NSString* fullPath = [[docSet.path stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
     
-    return [NSURL URLWithString:fullPath];
+    return fullPath;
 }
 @end

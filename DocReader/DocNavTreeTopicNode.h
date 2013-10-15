@@ -14,7 +14,6 @@
 
 @interface DocNavTreeTopicNode : DocNavTreeNode {
     
-    
     DocSetTopic* topic;
     NSDictionary* info;
     DocNavTreeDocsetNode* docsetNode;
