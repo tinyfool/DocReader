@@ -8,17 +8,19 @@
 
 #import "DocNavTreeTopicNode.h"
 #import "DocNavTreeDocsetNode.h"
+#import "DocSetTopic.h"
+#import "DocSet.h"
 
 @implementation DocNavTreeTopicNode
 @synthesize info;
 
-- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andInfo:(id)aInfo andDocsetNode:(DocNavTreeDocsetNode*)aDocset {
+- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andTopic:(DocSetTopic*)aTopic andDocsetNode:(DocNavTreeDocsetNode*)aDocsetNode {
 
     if (self = [super initWithPath:path parent:aParent]) {
         
-        info = aInfo;
-        label = [info objectForKey:@"ZKNAME"];
-        docset = aDocset;
+        topic = aTopic;
+        docsetNode = aDocsetNode;
+        label = topic.name;
     }
     return self;
     
@@ -29,44 +31,21 @@
     if (children!=nil)
         return children;
     
-    NSString* pk = [info objectForKey:@"Z_PK"];
-    NSInteger subCount = [[info objectForKey:@"ZKSUBNODECOUNT"] integerValue];
-    if (subCount<=0)
-        return nil;
-    NSMutableArray* aChildren = [[NSMutableArray alloc] initWithCapacity:subCount];
-    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODE WHERE ZPRIMARYPARENT = %@",pk];
-    NSArray* results = [docset runSql:sql];
-    for (id ret in results) {
+    NSArray* topicArray  = [docsetNode.docSet topicsWithParent:topic];
+    NSMutableArray* tempChildren = [NSMutableArray arrayWithCapacity:[topicArray count]];
+    for (DocSetTopic* aTopic in topicArray) {
         
-        NSString* path = [ret objectForKey:@"ZKPATH"];
-        DocNavTreeTopicNode* node = [[DocNavTreeTopicNode alloc] initWithPath:path parent:self andInfo:ret andDocsetNode:docset];
-        [aChildren addObject:node];
+        DocNavTreeTopicNode* node = [[DocNavTreeTopicNode alloc] initWithPath:aTopic.name parent:self andTopic:aTopic andDocsetNode:docsetNode];
+        [tempChildren addObject:node];
     }
-    children = aChildren;
-
+    if ([tempChildren count]!=0) {
+        children = tempChildren;
+    }
     return children;
 }
 
-- (NSURL*)Url {
-    
-    NSString* path = [info objectForKey:@"ZKPATH"];
-    NSString* pk = [info objectForKey:@"Z_PK"];
-    if (!path) {
-        
-        NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODEURL WHERE ZNODE = %@",pk];
-        NSArray* results = [docset runSql:sql];
-        path = [[results objectAtIndex:0] objectForKey:@"ZPATH"];
-        if (!path) {
-            NSString* zbaseurl = [[results objectAtIndex:0] objectForKey:@"ZBASEURL"];
-            if (zbaseurl) {
-                return [NSURL URLWithString:zbaseurl];
-            }
-            else
-                return nil;
-        }
-    }
-    NSString* fullPath = [[[srcPath stringByAppendingPathComponent:[docset relativePath]] stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
-    
-    return [NSURL URLWithString:fullPath];
+- (NSString*)Url {
+
+    return topic.url;
 }
 @end

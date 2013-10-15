@@ -7,15 +7,21 @@
 //
 
 #import "DocNavTreeNode.h"
+
 @class DocNavTreeDocsetNode;
+@class DocSet;
+@class DocSetTopic;
 
 @interface DocNavTreeTopicNode : DocNavTreeNode {
+    
+    
+    DocSetTopic* topic;
     NSDictionary* info;
-    DocNavTreeDocsetNode* docset;
+    DocNavTreeDocsetNode* docsetNode;
 }
 
-- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)parent andInfo:(id)aInfo andDocsetNode:(DocNavTreeDocsetNode*)aDocset;
-- (NSURL*)Url;
+- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andTopic:(DocSetTopic*)aTopic andDocsetNode:(DocNavTreeDocsetNode*)aDocsetNode;
+- (NSString*)Url;
 
 @property (readonly) NSDictionary* info;
 @end

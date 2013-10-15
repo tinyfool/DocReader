@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#define srcPath @"/Users/tinyfool/Library/Developer/Shared/Documentation/DocSets/"
 
 @class DocNavTreeRootNode;
 

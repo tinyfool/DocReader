@@ -29,6 +29,7 @@
 		BD63FBD0180CDAD100905F36 /* DocSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BD63FBCF180CDAD100905F36 /* DocSet.m */; };
 		BD68E294180808E6005226B3 /* MainDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E293180808E6005226B3 /* MainDelegate.m */; };
 		BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E29618080960005226B3 /* DocNavTreeNode.m */; };
+		BDDCE1BE180D0F6B006A9A7A /* DocSetTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDCE1BD180D0F6B006A9A7A /* DocSetTopic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		BD68E293180808E6005226B3 /* MainDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDelegate.m; sourceTree = "<group>"; };
 		BD68E29518080960005226B3 /* DocNavTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeNode.h; sourceTree = "<group>"; };
 		BD68E29618080960005226B3 /* DocNavTreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeNode.m; sourceTree = "<group>"; };
+		BDDCE1BC180D0F6B006A9A7A /* DocSetTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocSetTopic.h; sourceTree = "<group>"; };
+		BDDCE1BD180D0F6B006A9A7A /* DocSetTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocSetTopic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +170,7 @@
 				BD165BC81807CA4A0013913A /* DocReader.xcdatamodeld */,
 				BD165BB71807CA4A0013913A /* Supporting Files */,
 				BD4721EF1808611D00C00FA0 /* DocNavTree */,
-				BD63FBCE180CDAD100905F36 /* DocSet.h */,
-				BD63FBCF180CDAD100905F36 /* DocSet.m */,
+				BDDCE1BF180D0F71006A9A7A /* DocSetClass */,
 			);
 			path = DocReader;
 			sourceTree = "<group>";
@@ -217,6 +219,17 @@
 				BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */,
 			);
 			name = DocNavTree;
+			sourceTree = "<group>";
+		};
+		BDDCE1BF180D0F71006A9A7A /* DocSetClass */ = {
+			isa = PBXGroup;
+			children = (
+				BD63FBCE180CDAD100905F36 /* DocSet.h */,
+				BD63FBCF180CDAD100905F36 /* DocSet.m */,
+				BDDCE1BC180D0F6B006A9A7A /* DocSetTopic.h */,
+				BDDCE1BD180D0F6B006A9A7A /* DocSetTopic.m */,
+			);
+			name = DocSetClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +335,7 @@
 				BD4721F21808615E00C00FA0 /* DocNavTreeRootNode.m in Sources */,
 				BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */,
 				BD165BC41807CA4A0013913A /* AppDelegate.m in Sources */,
+				BDDCE1BE180D0F6B006A9A7A /* DocSetTopic.m in Sources */,
 				BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */,
 				BD63FBD0180CDAD100905F36 /* DocSet.m in Sources */,
 				BD165BCA1807CA4A0013913A /* DocReader.xcdatamodeld in Sources */,

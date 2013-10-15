@@ -9,18 +9,16 @@
 #import "DocNavTreeNode.h"
 #import <sqlite3.h>
 
+@class DocSet;
 @class DocNavTreeTopicNode;
 
 @interface DocNavTreeDocsetNode : DocNavTreeNode {
     
-    NSDictionary* docInfo;
-    sqlite3* dsidx_db;
+    DocSet* docSet;
 }
 
-@property (readonly) NSDictionary* docInfo;
-- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)parent andInfo:(id)aInfo;
+- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent;
 - (NSArray*)topicNodes:(DocNavTreeTopicNode*)aParent;
-- (sqlite3*) dsidx_db;
-- (NSArray*)runSql:(NSString*)sql;
 
+@property (readonly) DocSet* docSet;
 @end

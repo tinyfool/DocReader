@@ -34,40 +34,15 @@ static DocNavTreeRootNode *rootItem = nil;
     return rootItem;
 }
 
-- (NSDictionary*)docsetInfo:(NSString*)path {
-    
-    NSString *errorDesc = nil;
-    NSPropertyListFormat format;
-    
-    NSFileManager* filem = [NSFileManager defaultManager];
-    NSString* infoplistPath = [path stringByAppendingPathComponent:@"Contents/Info.plist"];
-    if (![filem fileExistsAtPath:infoplistPath isDirectory:nil])
-        return nil;
-    
-    NSData *plistXML = [filem contentsAtPath:infoplistPath];
-    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
-                                          propertyListFromData:plistXML
-                                          mutabilityOption:NSPropertyListMutableContainersAndLeaves
-                                          format:&format
-                                          errorDescription:&errorDesc];
-    if (!temp) {
-        NSLog(@"Error reading plist: %@", errorDesc);
-    }
-    
-    return temp;
-}
 
 - (NSMutableArray*)findAllDocsets {
     
     NSMutableArray* aChildren = [[NSMutableArray alloc] initWithCapacity:100];
     for (NSString* fullpath in pathArray) {
         
-        NSDictionary* docinfo = [self docsetInfo:fullpath];
-        if (docinfo) {
-            
-            DocNavTreeDocsetNode* node = [[DocNavTreeDocsetNode alloc] initWithPath:[fullpath lastPathComponent] parent:self andInfo:docinfo];
-            [aChildren addObject:node];
-        }
+        
+        DocNavTreeDocsetNode* node = [[DocNavTreeDocsetNode alloc] initWithPath:fullpath parent:self];
+        [aChildren addObject:node];
     }
     return aChildren;
 }
