@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BD127776180A6EC800246E14 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD127775180A6EC800246E14 /* WebKit.framework */; };
+		BD127779180B8E1F00246E14 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127778180B8E1F00246E14 /* setting.png */; };
+		BD127782180B94F700246E14 /* SettingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127781180B94F700246E14 /* SettingWindow.m */; };
 		BD165BB11807CA4A0013913A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD165BB01807CA4A0013913A /* Cocoa.framework */; };
 		BD165BBB1807CA4A0013913A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD165BB91807CA4A0013913A /* InfoPlist.strings */; };
 		BD165BBD1807CA4A0013913A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD165BBC1807CA4A0013913A /* main.m */; };
@@ -24,6 +26,7 @@
 		BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F41808638A00C00FA0 /* DocNavTreeDocsetNode.m */; };
 		BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */; };
 		BD4721FA1808D8E300C00FA0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */; };
+		BD63FBD0180CDAD100905F36 /* DocSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BD63FBCF180CDAD100905F36 /* DocSet.m */; };
 		BD68E294180808E6005226B3 /* MainDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E293180808E6005226B3 /* MainDelegate.m */; };
 		BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD68E29618080960005226B3 /* DocNavTreeNode.m */; };
 /* End PBXBuildFile section */
@@ -40,6 +43,9 @@
 
 /* Begin PBXFileReference section */
 		BD127775180A6EC800246E14 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		BD127778180B8E1F00246E14 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		BD127780180B94F700246E14 /* SettingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindow.h; sourceTree = "<group>"; };
+		BD127781180B94F700246E14 /* SettingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindow.m; sourceTree = "<group>"; };
 		BD165BAD1807CA4A0013913A /* DocReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD165BB01807CA4A0013913A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BD165BB31807CA4A0013913A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -67,6 +73,8 @@
 		BD4721F61808668600C00FA0 /* DocNavTreeTopicNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeTopicNode.h; sourceTree = "<group>"; };
 		BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeTopicNode.m; sourceTree = "<group>"; };
 		BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BD63FBCE180CDAD100905F36 /* DocSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocSet.h; sourceTree = "<group>"; };
+		BD63FBCF180CDAD100905F36 /* DocSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocSet.m; sourceTree = "<group>"; };
 		BD68E292180808E6005226B3 /* MainDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDelegate.h; sourceTree = "<group>"; };
 		BD68E293180808E6005226B3 /* MainDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDelegate.m; sourceTree = "<group>"; };
 		BD68E29518080960005226B3 /* DocNavTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeNode.h; sourceTree = "<group>"; };
@@ -96,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD127777180B8E1600246E14 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BD127778180B8E1F00246E14 /* setting.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		BD165BA41807CA4A0013913A = {
 			isa = PBXGroup;
 			children = (
@@ -142,11 +158,17 @@
 			children = (
 				BD165BC21807CA4A0013913A /* AppDelegate.h */,
 				BD165BC31807CA4A0013913A /* AppDelegate.m */,
+				BD68E292180808E6005226B3 /* MainDelegate.h */,
+				BD68E293180808E6005226B3 /* MainDelegate.m */,
 				BD165BC51807CA4A0013913A /* MainMenu.xib */,
+				BD127780180B94F700246E14 /* SettingWindow.h */,
+				BD127781180B94F700246E14 /* SettingWindow.m */,
 				BD165BCB1807CA4A0013913A /* Images.xcassets */,
 				BD165BC81807CA4A0013913A /* DocReader.xcdatamodeld */,
 				BD165BB71807CA4A0013913A /* Supporting Files */,
 				BD4721EF1808611D00C00FA0 /* DocNavTree */,
+				BD63FBCE180CDAD100905F36 /* DocSet.h */,
+				BD63FBCF180CDAD100905F36 /* DocSet.m */,
 			);
 			path = DocReader;
 			sourceTree = "<group>";
@@ -154,6 +176,7 @@
 		BD165BB71807CA4A0013913A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD127777180B8E1600246E14 /* images */,
 				BD165BB81807CA4A0013913A /* DocReader-Info.plist */,
 				BD165BB91807CA4A0013913A /* InfoPlist.strings */,
 				BD165BBC1807CA4A0013913A /* main.m */,
@@ -184,8 +207,6 @@
 		BD4721EF1808611D00C00FA0 /* DocNavTree */ = {
 			isa = PBXGroup;
 			children = (
-				BD68E292180808E6005226B3 /* MainDelegate.h */,
-				BD68E293180808E6005226B3 /* MainDelegate.m */,
 				BD68E29518080960005226B3 /* DocNavTreeNode.h */,
 				BD68E29618080960005226B3 /* DocNavTreeNode.m */,
 				BD4721F01808615E00C00FA0 /* DocNavTreeRootNode.h */,
@@ -276,6 +297,7 @@
 			files = (
 				BD165BBB1807CA4A0013913A /* InfoPlist.strings in Resources */,
 				BD165BCC1807CA4A0013913A /* Images.xcassets in Resources */,
+				BD127779180B8E1F00246E14 /* setting.png in Resources */,
 				BD165BC11807CA4A0013913A /* Credits.rtf in Resources */,
 				BD165BC71807CA4A0013913A /* MainMenu.xib in Resources */,
 			);
@@ -301,8 +323,10 @@
 				BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */,
 				BD165BC41807CA4A0013913A /* AppDelegate.m in Sources */,
 				BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */,
+				BD63FBD0180CDAD100905F36 /* DocSet.m in Sources */,
 				BD165BCA1807CA4A0013913A /* DocReader.xcdatamodeld in Sources */,
 				BD165BBD1807CA4A0013913A /* main.m in Sources */,
+				BD127782180B94F700246E14 /* SettingWindow.m in Sources */,
 				BD68E294180808E6005226B3 /* MainDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

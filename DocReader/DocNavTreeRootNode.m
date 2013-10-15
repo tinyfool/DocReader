@@ -12,19 +12,24 @@
 static DocNavTreeRootNode *rootItem = nil;
 
 
-- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent {
+- (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent withPathArray:(NSArray*) array{
     
     if (self = [super initWithPath:path parent:aParent]) {
         
+        pathArray = array;
         label = @"文档库";
     }
     return self;
 }
 
-+ (DocNavTreeRootNode *)rootItem {
++ (void)clearRootNode {
+
+    rootItem = nil;
+}
++ (DocNavTreeRootNode *)rootItemWithPathArray:(NSArray*)array{
     
     if (rootItem == nil) {
-        rootItem = [[DocNavTreeRootNode alloc] initWithPath:@"/" parent:nil];
+        rootItem = [[DocNavTreeRootNode alloc] initWithPath:@"/" parent:nil withPathArray:array];
     }
     return rootItem;
 }
@@ -55,15 +60,12 @@ static DocNavTreeRootNode *rootItem = nil;
 - (NSMutableArray*)findAllDocsets {
     
     NSMutableArray* aChildren = [[NSMutableArray alloc] initWithCapacity:100];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *array = [fileManager contentsOfDirectoryAtPath:srcPath error:NULL];
-    for (NSString* path in array) {
+    for (NSString* fullpath in pathArray) {
         
-        NSString* fullpath = [srcPath stringByAppendingPathComponent:path];
         NSDictionary* docinfo = [self docsetInfo:fullpath];
         if (docinfo) {
             
-            DocNavTreeDocsetNode* node = [[DocNavTreeDocsetNode alloc] initWithPath:path parent:self andInfo:docinfo];
+            DocNavTreeDocsetNode* node = [[DocNavTreeDocsetNode alloc] initWithPath:[fullpath lastPathComponent] parent:self andInfo:docinfo];
             [aChildren addObject:node];
         }
     }

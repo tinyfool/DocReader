@@ -9,6 +9,9 @@
 #import "DocNavTreeNode.h"
 
 @interface DocNavTreeRootNode : DocNavTreeNode
-+ (DocNavTreeRootNode *)rootItem;
-
+{
+    NSArray* pathArray;
+}
++ (DocNavTreeRootNode *)rootItemWithPathArray:(NSArray*)array;
++ (void)clearRootNode;
 @end

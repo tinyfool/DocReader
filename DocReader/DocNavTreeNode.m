@@ -12,8 +12,6 @@
 @implementation DocNavTreeNode
 @synthesize label;
 
-
-
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent {
     
     if (self = [super init]) {
