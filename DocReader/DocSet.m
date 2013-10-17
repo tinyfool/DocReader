@@ -114,6 +114,15 @@
 	sqlite3_finalize(statement);
 	return ret;
 }
+-(DocSetTopic*)topicWithNodeID:(NSString*)nodeID {
+    
+    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODE WHERE Z_PK = %@;",nodeID];
+    NSArray* results = [self runSql:sql];
+    if(!results)
+        return nil;
+    DocSetTopic* topic = [[DocSetTopic alloc] initWithDict:[results objectAtIndex:0] andDocSet:self];
+    return topic;
+}
 
 -(NSArray*)topicsWithParent:(DocSetTopic*)parent {
 
@@ -147,5 +156,26 @@
         [topicArray addObject:topic];
     }
     return topicArray;
+}
+
+-(NSArray*)search:(NSString*)word {
+
+    NSString* sql = [NSString stringWithFormat:
+                     @" SELECT * FROM ZTOKEN\
+                        LEFT JOIN ZTOKENTYPE ON ZTOKEN.ZTOKENTYPE = ZTOKENTYPE.Z_PK\
+                        WHERE ZTOKENNAME like '%%%@%%' \
+                        ORDER BY ZALPHASORTORDER\
+                        LIMIT 0,100\
+                     ",
+                     word];
+    NSArray* searchResults = [self runSql:sql];
+    NSMutableArray* ret = [[NSMutableArray alloc] initWithCapacity:[searchResults count]];
+    for (NSDictionary* result in searchResults) {
+        
+        NSMutableDictionary* newResult = [result mutableCopy];
+        [newResult setObject:self forKey:@"DocSet"];
+        [ret addObject:newResult];
+    }
+    return ret;
 }
 @end

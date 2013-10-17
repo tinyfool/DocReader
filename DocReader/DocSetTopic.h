@@ -19,5 +19,5 @@
 -(id)initWithDict:aInfo andDocSet:(DocSet*)aDocSet;
 @property (readonly) NSString* name;
 -(NSString*)z_pk;
--(NSString*)url;
+-(NSDictionary*)urlInfo;
 @end

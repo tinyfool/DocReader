@@ -8,6 +8,7 @@
 
 #import "DocSetTopic.h"
 #import "DocSet.h"
+#import "NSString+UrlEncode.h"
 
 @implementation DocSetTopic
 
@@ -31,15 +32,17 @@
     return [info objectForKey:@"Z_PK"];
 }
 
--(NSString*)url {
+-(NSDictionary*)urlInfo {
     
     NSString* path = [info objectForKey:@"ZKPATH"];
     NSString* pk = [info objectForKey:@"Z_PK"];
+    NSString* anchor = [info objectForKey:@"ZKANCHOR"];
     if (!path) {
         
         NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODEURL WHERE ZNODE = %@",pk];
         NSArray* results = [docSet runSql:sql];
         path = [[results objectAtIndex:0] objectForKey:@"ZPATH"];
+        anchor = [[results objectAtIndex:0] objectForKey:@"ZANCHOR"];
         if (!path) {
             NSString* zbaseurl = [[results objectAtIndex:0] objectForKey:@"ZBASEURL"];
             if (zbaseurl) {
@@ -50,7 +53,12 @@
         }
     }
     NSString* fullPath = [[docSet.path stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
-    
-    return fullPath;
+    NSMutableDictionary* urlInfo = [[NSMutableDictionary alloc] initWithCapacity:3];
+    if (anchor) {
+        [urlInfo setObject:anchor forKey:@"anchor"];
+    }
+    [urlInfo setObject:path forKey:@"path"];
+    [urlInfo setObject:fullPath forKey:@"url"];
+    return urlInfo;
 }
 @end

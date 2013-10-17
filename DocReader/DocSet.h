@@ -24,4 +24,6 @@
 - (sqlite3*) dsidx_db;
 - (NSArray*)runSql:(NSString*)sql;
 -(NSArray*)topicsWithParent:(DocSetTopic*)parent;
+-(DocSetTopic*)topicWithNodeID:(NSString*)nodeID;
+-(NSArray*)search:(NSString*)word;
 @end

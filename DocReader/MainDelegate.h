@@ -10,10 +10,19 @@
 #import <WebKit/WebKit.h>
 @class DocNavTreeTopicNode;
 @class SettingWindow;
-@interface MainDelegate : NSObject {
+@class DocNavTreeRootNode;
+@class SearchResultsViewController;
+
+@interface MainDelegate : NSObject<NSControlTextEditingDelegate> {
 
     NSArray* docSetPathArray;
+    NSMutableArray* searchDocSets;
+    DocNavTreeRootNode* rootNode;
+    SearchResultsViewController* searchResultsViewController;
+    NSPopover* searchPopover;
+    NSOperationQueue* searchQueue;
 }
+
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet WebView *docWebview;
 - (IBAction)updateFilter:sender;

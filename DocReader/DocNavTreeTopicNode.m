@@ -44,8 +44,8 @@
     return children;
 }
 
-- (NSString*)Url {
+- (NSDictionary*)urlInfo {
 
-    return topic.url;
+    return topic.urlInfo;
 }
 @end

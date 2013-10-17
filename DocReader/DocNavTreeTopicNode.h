@@ -20,7 +20,7 @@
 }
 
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent andTopic:(DocSetTopic*)aTopic andDocsetNode:(DocNavTreeDocsetNode*)aDocsetNode;
-- (NSString*)Url;
+- (NSDictionary*)urlInfo;
 
 @property (readonly) NSDictionary* info;
 @end

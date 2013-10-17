@@ -38,12 +38,14 @@ static DocNavTreeRootNode *rootItem = nil;
 - (NSMutableArray*)findAllDocsets {
     
     NSMutableArray* aChildren = [[NSMutableArray alloc] initWithCapacity:100];
+    NSMutableArray* aDocSetArray = [[NSMutableArray alloc] initWithCapacity:100];
     for (NSString* fullpath in pathArray) {
         
-        
         DocNavTreeDocsetNode* node = [[DocNavTreeDocsetNode alloc] initWithPath:fullpath parent:self];
+        [aDocSetArray addObject:node.docSet];
         [aChildren addObject:node];
     }
+    docSetArray = aDocSetArray;
     return aChildren;
 }
 
@@ -55,4 +57,8 @@ static DocNavTreeRootNode *rootItem = nil;
     return children;
 }
 
+-(NSArray*)docSetArray {
+
+    return docSetArray;
+}
 @end

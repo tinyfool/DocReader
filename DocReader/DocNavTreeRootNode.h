@@ -11,7 +11,9 @@
 @interface DocNavTreeRootNode : DocNavTreeNode
 {
     NSArray* pathArray;
+    NSArray* docSetArray;
 }
 + (DocNavTreeRootNode *)rootItemWithPathArray:(NSArray*)array;
 + (void)clearRootNode;
+-(NSArray*)docSetArray;
 @end

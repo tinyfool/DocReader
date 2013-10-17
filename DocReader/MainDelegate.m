@@ -11,6 +11,8 @@
 #import "DocNavTreeRootNode.h"
 #import "DocNavTreeTopicNode.h"
 #import "SettingWindow.h"
+#import "DocSet.h"
+#import "SearchResultsViewController.h"
 
 #define USER_docSetPaths @"USER_docSetPaths"
 @implementation MainDelegate
@@ -65,9 +67,11 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
     
-    if (item == nil)
-        return [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
-
+    if (item == nil) {
+        DocNavTreeRootNode* aRootNode = [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
+        rootNode = aRootNode;
+        return aRootNode;
+    }
     return [(DocNavTreeNode *)item childAtIndex:index];
 }
 
@@ -85,11 +89,18 @@
     if ([[item class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
         
         DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
-        NSURL* url = [NSURL fileURLWithPath:topic.Url];
+        NSDictionary* urlInfo = topic.urlInfo;
+        NSURL* url = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
         if (url) {
             [[self.docWebview mainFrame]
              loadRequest:
              [NSURLRequest requestWithURL:url]];
+            NSString* anchor = [urlInfo objectForKey:@"anchor"];
+            if (anchor) {
+                
+                NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
+                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+            }
         }
     }
     return YES;
@@ -100,14 +111,57 @@
     return NO;
 }
 
+- (void)controlTextDidChange:(NSNotification *)notification {
+
+    NSTextField *textField = [notification object];
+    NSString* word = [textField stringValue];
+    
+    if (!searchResultsViewController) {
+    
+        searchResultsViewController = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsView" bundle:nil];
+        [searchResultsViewController setDocWebView:self.docWebview];
+    }
+    if (!searchPopover) {
+        
+        searchPopover = [[NSPopover alloc] init];
+        searchPopover.contentViewController = searchResultsViewController;
+        searchPopover.behavior = NSPopoverBehaviorSemitransient;
+    }
+    if (!searchPopover.shown) {
+        
+        [searchPopover showRelativeToRect:textField.bounds ofView:textField preferredEdge:NSMinYEdge];
+        [textField becomeFirstResponder];
+    }
+    
+    if (!searchQueue) {
+        
+        searchQueue = [[NSOperationQueue alloc] init];
+    }
+    [searchQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+        NSArray* results;
+        for (DocSet* aDocSet in rootNode.docSetArray) {
+            results = [aDocSet search:word];
+            break;
+        }
+        dispatch_async(dispatch_get_main_queue(),^{
+            
+            searchResultsViewController.results = results;
+            [searchResultsViewController.resultsTableview reloadData];
+        });
+    }]];
+}
+
+
 - (IBAction)updateFilter:sender {
 
-    NSSearchField* searchField = (NSSearchField*) sender;
-    NSLog(@"%@",[searchField stringValue]);
 }
 
 - (IBAction)Setting:(id)sender {
 
     [NSApp runModalForWindow:self.settingWindow];
 }
+
+
+
+
 @end
