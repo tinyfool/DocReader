@@ -90,16 +90,23 @@
         
         DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
         NSDictionary* urlInfo = topic.urlInfo;
-        NSURL* url = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
-        if (url) {
-            [[self.docWebview mainFrame]
-             loadRequest:
-             [NSURLRequest requestWithURL:url]];
-            NSString* anchor = [urlInfo objectForKey:@"anchor"];
-            if (anchor) {
-                
-                NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
-                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+        NSURL *fileURL = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
+        NSString* anchor = [urlInfo objectForKey:@"anchor"];
+        
+        NSURL *fullURL = fileURL;
+        if (anchor) {
+            fullURL = [NSURL URLWithString:[NSString stringWithFormat:@"#%@",anchor] relativeToURL:fileURL];
+        }
+
+        if (fileURL) {
+            NSString *currentPath = self.docWebview.mainFrame.dataSource.request.URL.path;
+            if (![currentPath isEqualToString:fileURL.path]) {
+                [[self.docWebview mainFrame] loadRequest:[NSURLRequest requestWithURL:fullURL]];
+            } else {
+                if (anchor) {
+                    NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
+                    [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+                }
             }
         }
     }
