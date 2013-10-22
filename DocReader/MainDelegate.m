@@ -17,6 +17,19 @@
 #define USER_docSetPaths @"USER_docSetPaths"
 @implementation MainDelegate
 
+- (void)awakeFromNib
+{
+    [self reloadData];
+}
+
+- (void)reloadData
+{
+    [DocNavTreeRootNode clearRootNode];
+    DocNavTreeRootNode* aRootNode = [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
+    rootNode = aRootNode;
+    self.nodes = [[aRootNode children] mutableCopy];
+
+}
 
 -(NSArray*)docSetPathArray {
 
@@ -42,53 +55,17 @@
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:docSetPathArray forKey:USER_docSetPaths];
     [userDefaults synchronize];
-    [DocNavTreeRootNode clearRootNode];
-    [self.outlineView reloadData];
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
-    if (item==nil)
-        return 1;
-    else
-        return [(DocNavTreeNode*)item numberOfChildren];
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-
-    if (item == nil)
-        return YES;
-
-    if ([(DocNavTreeNode*)item numberOfChildren] != -1)
-        return YES;
-    
-    return NO;
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    
-    if (item == nil) {
-        DocNavTreeRootNode* aRootNode = [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
-        rootNode = aRootNode;
-        return aRootNode;
-    }
-    return [(DocNavTreeNode *)item childAtIndex:index];
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    
-    DocNavTreeNode* node = item;
-    if (node == nil)
-        return @"文档库";
-    
-    return [item label];
+    [self reloadData];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
 
-    if ([[item class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
+    id node = [item representedObject];
+    
+    if ([[node class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
         
-        DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
+        DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)node;
         NSDictionary* urlInfo = topic.urlInfo;
         NSURL *fileURL = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
         NSString* anchor = [urlInfo objectForKey:@"anchor"];
