@@ -120,8 +120,8 @@
 
 - (void)controlTextDidChange:(NSNotification *)notification {
 
-    NSTextField *textField = [notification object];
-    NSString* word = [textField stringValue];
+    NSSearchField *searchField = [notification object];
+    NSString* word = [searchField stringValue];
     
     if (!searchResultsViewController) {
     
@@ -136,8 +136,9 @@
     }
     if (!searchPopover.shown) {
         
-        [searchPopover showRelativeToRect:textField.bounds ofView:textField preferredEdge:NSMinYEdge];
-        [textField becomeFirstResponder];
+        [searchPopover showRelativeToRect:searchField.bounds ofView:searchField preferredEdge:NSMinYEdge];
+        [searchField becomeFirstResponder];
+        [[searchField currentEditor] moveToEndOfLine:nil];
     }
     
     if (!searchQueue) {
