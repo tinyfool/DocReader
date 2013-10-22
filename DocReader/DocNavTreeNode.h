@@ -24,6 +24,9 @@
 - (NSString *)relativePath;
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)obj;
 
+@property (nonatomic, strong) NSArray *children;
+@property (nonatomic, copy) NSString *path;
+
 @property (readonly) int level;
 @property (readonly) NSString* label;
 @end

@@ -24,11 +24,6 @@
     return self;
 }
 
--(void)setDocWebView:(WebView*)webview {
-
-    docWebview = webview;
-}
-
 -(void)setResults:(NSArray*)aResults {
 
     results = aResults;
@@ -39,28 +34,64 @@
     return [results count];
 }
 
+- (NSString *)readableTypeNameForDatabaseType:(NSString *)type
+{
+    static NSDictionary *map = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        map = @{
+                @"cat":@"",
+                @"cl":@"Class",
+                @"clm":@"", //Class Method
+                @"data":@"Data",
+                @"econst":@"",
+                @"func":@"function",
+                @"instm":@"", //Instance Method
+                @"instp":@"", //Instance Property
+                @"intf":@"",
+                @"intfm":@"",
+                @"intfp":@"",
+                @"macro":@"macro",
+                @"tag":@"tag",
+                @"tdef":@"typedef",
+                };
+
+    });
+    NSString *readable = map[type];
+    if (readable.length == 0) {
+        if (!readable) {NSLog(@"[DEBUG]missing type: %@",type);}
+        readable = type;
+    }
+    return readable;
+}
+
+- (NSString *)imageFileNameForDatabaseType:(NSString *)type
+{
+    static NSDictionary *map = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        map = @{
+                @"cl":@"class.png",
+                @"func":@"function.jpg",
+                };
+    });
+    NSString *fileName = map[type];
+    if (fileName.length == 0) {
+        fileName = @"class.png";
+    }
+    return fileName;
+
+}
+
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
 
     id ret = [results objectAtIndex:row];
     NSString* type = [ret objectForKey:@"ZTYPENAME"];
-    NSString* typename = @"";
-    NSString* filename = @"class.png";
-    if ([type isEqualToString:@"cl"]) {
-        
-        typename = @"Class";
-        
-    } else if ([type isEqualToString:@"func"]) {
+    NSString* typename = [self readableTypeNameForDatabaseType:type];
+    NSString* filename =  [self imageFileNameForDatabaseType:type];
     
-        typename = @"function";
-        filename = @"function.jpg";
-    }
-    
-    else {
-    
-        typename = type;
-    }
     if ([tableColumn.identifier isEqualToString:@"left"]) {
         
         NSTableCellView* cell = [tableView makeViewWithIdentifier:@"LEFT_CELL" owner:self];
@@ -71,28 +102,17 @@
         NSTableCellView* cell = [tableView makeViewWithIdentifier:@"RIGHT_CELL" owner:self];
         NSString* tokenName = [ret objectForKey:@"ZTOKENNAME"];
         [cell.textField setStringValue:tokenName];
-        cell.imageView.image = [NSImage imageNamed:@"class.png"];
+        cell.imageView.image = [NSImage imageNamed:filename];
         return cell;
     }
 }
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
-
     NSDictionary* data = [results objectAtIndex:row];
     NSString* nodeid = [data objectForKey:@"ZPARENTNODE"];
     DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithNodeID:nodeid];
-    NSDictionary* urlInfo = topic.urlInfo;
-    NSURL* url = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
-    if (url) {
-        [[docWebview mainFrame]
-         loadRequest:
-         [NSURLRequest requestWithURL:url]];
-        NSString* anchor = [urlInfo objectForKey:@"anchor"];
-        if (anchor) {
-            
-            NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
-            [docWebview stringByEvaluatingJavaScriptFromString:js];
-        }
+    if ([self.delegate respondsToSelector:@selector(searchResultsViewController:didSelectedItem:)]) {
+        [self.delegate searchResultsViewController:self didSelectedItem:topic];
     }
     return YES;
 }

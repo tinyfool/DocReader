@@ -14,9 +14,26 @@
 #import "DocSet.h"
 #import "SearchResultsViewController.h"
 
+@interface MainDelegate () <SearchResultsViewControllerDelegate>
+
+@end
+
 #define USER_docSetPaths @"USER_docSetPaths"
 @implementation MainDelegate
 
+- (void)awakeFromNib
+{
+    [self reloadData];
+}
+
+- (void)reloadData
+{
+    [DocNavTreeRootNode clearRootNode];
+    DocNavTreeRootNode* aRootNode = [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
+    rootNode = aRootNode;
+    self.nodes = [[aRootNode children] mutableCopy];
+
+}
 
 -(NSArray*)docSetPathArray {
 
@@ -42,66 +59,16 @@
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:docSetPathArray forKey:USER_docSetPaths];
     [userDefaults synchronize];
-    [DocNavTreeRootNode clearRootNode];
-    [self.outlineView reloadData];
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
-    if (item==nil)
-        return 1;
-    else
-        return [(DocNavTreeNode*)item numberOfChildren];
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-
-    if (item == nil)
-        return YES;
-
-    if ([(DocNavTreeNode*)item numberOfChildren] != -1)
-        return YES;
-    
-    return NO;
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    
-    if (item == nil) {
-        DocNavTreeRootNode* aRootNode = [DocNavTreeRootNode rootItemWithPathArray:self.docSetPathArray];
-        rootNode = aRootNode;
-        return aRootNode;
-    }
-    return [(DocNavTreeNode *)item childAtIndex:index];
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    
-    DocNavTreeNode* node = item;
-    if (node == nil)
-        return @"文档库";
-    
-    return [item label];
+    [self reloadData];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
 
-    if ([[item class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
-        
-        DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)item;
-        NSDictionary* urlInfo = topic.urlInfo;
-        NSURL* url = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
-        if (url) {
-            [[self.docWebview mainFrame]
-             loadRequest:
-             [NSURLRequest requestWithURL:url]];
-            NSString* anchor = [urlInfo objectForKey:@"anchor"];
-            if (anchor) {
-                
-                NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
-                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
-            }
-        }
+    id node = [item representedObject];
+    
+    if ([[node class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
+        [self loadContentOfTopic:node];
     }
     return YES;
 }
@@ -111,15 +78,39 @@
     return NO;
 }
 
+- (void)loadContentOfTopic:(DocNavTreeTopicNode *)topic
+{
+    NSDictionary* urlInfo = topic.urlInfo;
+    NSURL *fileURL = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
+    NSString* anchor = [urlInfo objectForKey:@"anchor"];
+    
+    NSURL *fullURL = fileURL;
+    if (anchor) {
+        fullURL = [NSURL URLWithString:[NSString stringWithFormat:@"#%@",anchor] relativeToURL:fileURL];
+    }
+    
+    if (fileURL) {
+        NSString *currentPath = self.docWebview.mainFrame.dataSource.request.URL.path;
+        if (![currentPath isEqualToString:fileURL.path]) {
+            [[self.docWebview mainFrame] loadRequest:[NSURLRequest requestWithURL:fullURL]];
+        } else {
+            if (anchor) {
+                NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
+                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+            }
+        }
+    }
+}
+
 - (void)controlTextDidChange:(NSNotification *)notification {
 
-    NSTextField *textField = [notification object];
-    NSString* word = [textField stringValue];
+    NSSearchField *searchField = [notification object];
+    NSString* word = [searchField stringValue];
     
     if (!searchResultsViewController) {
     
         searchResultsViewController = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsView" bundle:nil];
-        [searchResultsViewController setDocWebView:self.docWebview];
+        searchResultsViewController.delegate = self;
     }
     if (!searchPopover) {
         
@@ -129,8 +120,9 @@
     }
     if (!searchPopover.shown) {
         
-        [searchPopover showRelativeToRect:textField.bounds ofView:textField preferredEdge:NSMinYEdge];
-        [textField becomeFirstResponder];
+        [searchPopover showRelativeToRect:searchField.bounds ofView:searchField preferredEdge:NSMinYEdge];
+        [searchField becomeFirstResponder];
+        [[searchField currentEditor] moveToEndOfLine:nil];
     }
     
     if (!searchQueue) {
@@ -138,10 +130,10 @@
         searchQueue = [[NSOperationQueue alloc] init];
     }
     [searchQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
-        NSArray* results;
+        NSMutableArray* results = [NSMutableArray array];
         for (DocSet* aDocSet in rootNode.docSetArray) {
-            results = [aDocSet search:word];
-            break;
+            NSArray *aResults = [aDocSet search:word];
+            [results addObjectsFromArray:aResults];
         }
         dispatch_async(dispatch_get_main_queue(),^{
             
@@ -151,6 +143,10 @@
     }]];
 }
 
+- (void)searchResultsViewController:(SearchResultsViewController *)vc didSelectedItem:(id)item
+{
+    [self loadContentOfTopic:item];
+}
 
 - (IBAction)updateFilter:sender {
 

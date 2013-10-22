@@ -11,6 +11,7 @@
 
 @implementation DocNavTreeNode
 @synthesize label;
+@synthesize children = children;
 
 - (id)initWithPath:(NSString *)path parent:(DocNavTreeNode *)aParent {
     
@@ -18,6 +19,7 @@
         
         relativePath = [[path lastPathComponent] copy];
         parent = aParent;
+        _path = [path copy];
     }
     return self;
 }
@@ -30,7 +32,7 @@
         return [tmp count];
     }
     else
-        return -1;
+        return 0;
 }
 
 - (DocNavTreeNode *)childAtIndex:(NSInteger)n {
@@ -56,4 +58,23 @@
         return children;
     return nil;
 }
+
+- (NSUInteger)hash
+{
+    return self.path.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    
+    if ([self isMemberOfClass:[object class]]) {
+        return [[self path] isEqualToString:[object path]];
+    }
+    
+    return NO;
+}
+
 @end

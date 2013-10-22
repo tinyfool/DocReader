@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4511"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="3336"/>
     </dependencies>
     <objects>
@@ -691,11 +691,13 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <connections>
+                                                                <binding destination="043-8f-JXD" name="value" keyPath="arrangedObjects.label" id="hF5-gA-GGC"/>
+                                                            </connections>
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="cJE-qd-r65" id="fTD-Py-zEx"/>
-                                                        <outlet property="delegate" destination="cJE-qd-r65" id="aBR-Ko-3Qh"/>
+                                                        <outlet property="delegate" destination="cJE-qd-r65" id="6Ub-1v-PA6"/>
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
@@ -802,6 +804,7 @@
                 <outlet property="docWebview" destination="37X-St-1GJ" id="Y7e-k8-1Yu"/>
                 <outlet property="outlineView" destination="OD1-DO-F1a" id="yVP-HH-iWD"/>
                 <outlet property="settingWindow" destination="aGI-8F-Oi5" id="1Wf-1W-5vB"/>
+                <outlet property="treeController" destination="043-8f-JXD" id="kAL-H8-vXo"/>
             </connections>
         </customObject>
         <window title="选择文档库" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="aGI-8F-Oi5" userLabel="SettingWindow" customClass="SettingWindow">
@@ -936,6 +939,12 @@
                 <outlet property="mainDelegate" destination="cJE-qd-r65" id="Uc8-Yy-dji"/>
             </connections>
         </window>
+        <treeController objectClassName="DocNavTreeNode" editable="NO" childrenKeyPath="children" countKeyPath="numberOfChildren" selectsInsertedObjects="NO" id="043-8f-JXD">
+            <connections>
+                <binding destination="cJE-qd-r65" name="contentArray" keyPath="nodes" id="4KF-FP-38r"/>
+            </connections>
+        </treeController>
+        <userDefaultsController representsSharedInstance="YES" id="QJV-2g-0Wa"/>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

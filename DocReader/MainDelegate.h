@@ -23,6 +23,10 @@
     NSOperationQueue* searchQueue;
 }
 
+@property (nonatomic, strong) IBOutlet NSMutableArray *nodes;
+@property (nonatomic, strong) IBOutlet NSTreeController *treeController;
+
+
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet WebView *docWebview;
 - (IBAction)updateFilter:sender;
