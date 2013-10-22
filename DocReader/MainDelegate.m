@@ -130,10 +130,10 @@
         searchQueue = [[NSOperationQueue alloc] init];
     }
     [searchQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
-        NSArray* results;
+        NSMutableArray* results = [NSMutableArray array];
         for (DocSet* aDocSet in rootNode.docSetArray) {
-            results = [aDocSet search:word];
-            break;
+            NSArray *aResults = [aDocSet search:word];
+            [results addObjectsFromArray:aResults];
         }
         dispatch_async(dispatch_get_main_queue(),^{
             
