@@ -14,6 +14,10 @@
 #import "DocSet.h"
 #import "SearchResultsViewController.h"
 
+@interface MainDelegate () <SearchResultsViewControllerDelegate>
+
+@end
+
 #define USER_docSetPaths @"USER_docSetPaths"
 @implementation MainDelegate
 
@@ -64,28 +68,7 @@
     id node = [item representedObject];
     
     if ([[node class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
-        
-        DocNavTreeTopicNode* topic = (DocNavTreeTopicNode*)node;
-        NSDictionary* urlInfo = topic.urlInfo;
-        NSURL *fileURL = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
-        NSString* anchor = [urlInfo objectForKey:@"anchor"];
-        
-        NSURL *fullURL = fileURL;
-        if (anchor) {
-            fullURL = [NSURL URLWithString:[NSString stringWithFormat:@"#%@",anchor] relativeToURL:fileURL];
-        }
-
-        if (fileURL) {
-            NSString *currentPath = self.docWebview.mainFrame.dataSource.request.URL.path;
-            if (![currentPath isEqualToString:fileURL.path]) {
-                [[self.docWebview mainFrame] loadRequest:[NSURLRequest requestWithURL:fullURL]];
-            } else {
-                if (anchor) {
-                    NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
-                    [self.docWebview stringByEvaluatingJavaScriptFromString:js];
-                }
-            }
-        }
+        [self loadContentOfTopic:node];
     }
     return YES;
 }
@@ -93,6 +76,30 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
 
     return NO;
+}
+
+- (void)loadContentOfTopic:(DocNavTreeTopicNode *)topic
+{
+    NSDictionary* urlInfo = topic.urlInfo;
+    NSURL *fileURL = [NSURL fileURLWithPath:[urlInfo objectForKey:@"url"]];
+    NSString* anchor = [urlInfo objectForKey:@"anchor"];
+    
+    NSURL *fullURL = fileURL;
+    if (anchor) {
+        fullURL = [NSURL URLWithString:[NSString stringWithFormat:@"#%@",anchor] relativeToURL:fileURL];
+    }
+    
+    if (fileURL) {
+        NSString *currentPath = self.docWebview.mainFrame.dataSource.request.URL.path;
+        if (![currentPath isEqualToString:fileURL.path]) {
+            [[self.docWebview mainFrame] loadRequest:[NSURLRequest requestWithURL:fullURL]];
+        } else {
+            if (anchor) {
+                NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",anchor];
+                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+            }
+        }
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {
@@ -103,7 +110,7 @@
     if (!searchResultsViewController) {
     
         searchResultsViewController = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsView" bundle:nil];
-        [searchResultsViewController setDocWebView:self.docWebview];
+        searchResultsViewController.delegate = self;
     }
     if (!searchPopover) {
         
@@ -136,6 +143,10 @@
     }]];
 }
 
+- (void)searchResultsViewController:(SearchResultsViewController *)vc didSelectedItem:(id)item
+{
+    [self loadContentOfTopic:item];
+}
 
 - (IBAction)updateFilter:sender {
 
