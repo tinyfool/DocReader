@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4511"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="3336"/>
     </dependencies>
     <objects>
@@ -651,35 +651,35 @@
         <window title="DocReader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="373" y="237" width="594" height="498"/>
+            <rect key="contentRect" x="373" y="237" width="559" height="498"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="594" height="498"/>
+                <rect key="frame" x="0.0" y="0.0" width="559" height="498"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-gi-5l2">
-                        <rect key="frame" x="0.0" y="0.0" width="594" height="498"/>
+                        <rect key="frame" x="0.0" y="0.0" width="559" height="498"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="0np-rl-QDZ">
-                                <rect key="frame" x="0.0" y="0.0" width="124" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="117" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyv-5k-Vcx">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="117" height="498"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" id="68L-3e-mqL">
-                                            <rect key="frame" x="1" y="1" width="122" height="496"/>
+                                            <rect key="frame" x="1" y="1" width="115" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="EOF-6H-51f" id="OD1-DO-F1a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="122" height="496"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="496"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="119" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
+                                                        <tableColumn width="112" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -721,11 +721,11 @@
                                 </constraints>
                             </customView>
                             <customView id="eaI-0t-VeQ">
-                                <rect key="frame" x="134" y="0.0" width="460" height="498"/>
+                                <rect key="frame" x="127" y="0.0" width="432" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="37X-St-1GJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="460" height="498"/>
+                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="37X-St-1GJ" customClass="DocNavWebview">
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="498"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                             <nil key="identifier"/>
@@ -782,10 +782,32 @@
                             <action selector="Setting:" target="cJE-qd-r65" id="mTR-W4-9Wv"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="495F3774-B6F9-4096-B4FD-28DFF1019E65" label="Dictionary" paletteLabel="Dictionary" tag="-1" image="dictionary" id="pSB-oY-vk5" userLabel="dictionaryButton">
+                        <connections>
+                            <action selector="dictionary:" target="cJE-qd-r65" id="sh2-ov-rBQ"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="D853335E-2FA0-4166-ABDE-F4A596E1A844" label="Custom View" paletteLabel="Custom View" image="dictionary" id="Jie-aW-Hg4">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="21"/>
+                        <size key="maxSize" width="84" height="40"/>
+                        <button key="view" id="LhH-3G-g9q">
+                            <rect key="frame" x="14" y="14" width="49" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="dictionary" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="2IN-h7-cLR">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="dictionary:" target="cJE-qd-r65" id="zpX-to-gY9"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="Ftu-Jv-z1w"/>
                     <toolbarItem reference="vaf-N9-d2x"/>
+                    <toolbarItem reference="Jie-aW-Hg4"/>
                     <toolbarItem reference="Zwi-A5-7Wy"/>
                 </defaultToolbarItems>
                 <connections>
@@ -801,6 +823,8 @@
         <customObject id="420" customClass="NSFontManager"/>
         <customObject id="cJE-qd-r65" userLabel="MainDelegate" customClass="MainDelegate">
             <connections>
+                <outlet property="dictionary" destination="pSB-oY-vk5" id="cXq-Ge-2T7"/>
+                <outlet property="dictionaryButton" destination="LhH-3G-g9q" id="RPP-n3-uR6"/>
                 <outlet property="docWebview" destination="37X-St-1GJ" id="Y7e-k8-1Yu"/>
                 <outlet property="outlineView" destination="OD1-DO-F1a" id="yVP-HH-iWD"/>
                 <outlet property="settingWindow" destination="aGI-8F-Oi5" id="1Wf-1W-5vB"/>
@@ -948,6 +972,7 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="dictionary" width="512" height="512"/>
         <image name="setting" width="240" height="240"/>
     </resources>
 </document>

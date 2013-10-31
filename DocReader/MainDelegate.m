@@ -13,6 +13,8 @@
 #import "SettingWindow.h"
 #import "DocSet.h"
 #import "SearchResultsViewController.h"
+#import "DictionaryViewController.h"
+#import "DocNavWebview.h"
 
 @interface MainDelegate () <SearchResultsViewControllerDelegate>
 
@@ -24,6 +26,7 @@
 - (void)awakeFromNib
 {
     [self reloadData];
+    self.docWebview.DocNavWebviewDelegate = self;
 }
 
 - (void)reloadData
@@ -130,16 +133,19 @@
         searchQueue = [[NSOperationQueue alloc] init];
     }
     [searchQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+        NSMutableArray* oLdresults = [NSMutableArray array];
         NSMutableArray* results = [NSMutableArray array];
         for (DocSet* aDocSet in rootNode.docSetArray) {
             NSArray *aResults = [aDocSet search:word];
             [results addObject:aResults];
+            [oLdresults addObjectsFromArray:aResults];
         }
-        
         NSArray* combineResults = [DocSet combineSearchResults:results];
+        NSLog(@"%@",results);
+        NSLog(@"%@",combineResults);
         dispatch_async(dispatch_get_main_queue(),^{
             
-            searchResultsViewController.results = results;
+            searchResultsViewController.results = oLdresults;
             [searchResultsViewController.resultsTableview reloadData];
         });
     }]];
@@ -159,7 +165,58 @@
     [NSApp runModalForWindow:self.settingWindow];
 }
 
+-(void)showDictionaryView {
+
+    if (!dictionaryViewController) {
+        
+        dictionaryViewController = [[DictionaryViewController alloc] initWithNibName:@"DictionaryViewController" bundle:nil];
+    }
+    if (!dictionaryPopover) {
+        
+        dictionaryPopover = [[NSPopover alloc] init];
+        dictionaryPopover.contentViewController = dictionaryViewController;
+        dictionaryPopover.behavior = NSPopoverBehaviorSemitransient;
+    }
+    if (!dictionaryPopover.shown) {
+        
+        [dictionaryPopover showRelativeToRect:self.dictionaryButton.bounds ofView:self.dictionaryButton preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)dictionary:(id)sender {
+ 
+    [self showDictionaryView];
+}
+
+-(NSSpeechSynthesizer*)speech {
+    
+    if (!speech) {
+        
+        speech = [[NSSpeechSynthesizer alloc] initWithVoice:nil];
+    }
+    return speech;
+}
+
+-(void)speak:(NSString*)word {
+
+    [[self speech] startSpeakingString:word];
+
+}
+
+-(void)translate:(NSString*)word {
 
 
+}
+
+-(void)showDictionary:(NSString*)word {
+
+    [[self speech] startSpeakingString:word];
+    [self showDictionaryView];
+    CFRange range = DCSGetTermRangeInString(NULL,(__bridge CFStringRef)word,0);
+    NSString* result =  (__bridge NSString *)(DCSCopyTextDefinition(NULL,(__bridge CFStringRef)word,range));
+    NSString* newWord = [word substringWithRange:NSMakeRange(range.location, range.length)];
+    if (dictionaryViewController)
+        [dictionaryViewController setWord:newWord andDefinition:result];
+}
 
 @end
