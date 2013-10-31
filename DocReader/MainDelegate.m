@@ -133,8 +133,10 @@
         NSMutableArray* results = [NSMutableArray array];
         for (DocSet* aDocSet in rootNode.docSetArray) {
             NSArray *aResults = [aDocSet search:word];
-            [results addObjectsFromArray:aResults];
+            [results addObject:aResults];
         }
+        
+        NSArray* combineResults = [DocSet combineSearchResults:results];
         dispatch_async(dispatch_get_main_queue(),^{
             
             searchResultsViewController.results = results;

@@ -178,4 +178,11 @@
     }
     return ret;
 }
+
++(NSArray*)combineSearchResults:(NSArray*)results {
+
+    NSLog(@"%@",results);
+    return nil;
+}
+
 @end

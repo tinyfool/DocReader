@@ -26,4 +26,5 @@
 -(NSArray*)topicsWithParent:(DocSetTopic*)parent;
 -(DocSetTopic*)topicWithNodeID:(NSString*)nodeID;
 -(NSArray*)search:(NSString*)word;
++(NSArray*)combineSearchResults:(NSArray*)results;
 @end
