@@ -13,12 +13,17 @@
 @interface SearchResultsViewController : NSViewController<NSTableViewDataSource,NSTableViewDelegate> {
 
     NSArray* results;
+    NSSegmentedControl* docsetSelector;
+    NSArray* segmentArray;
 }
 @property (weak) id<SearchResultsViewControllerDelegate> delegate;
 
 @property (weak) IBOutlet NSTableView *resultsTableview;
 
 -(void)setResults:(NSArray*)aResults;
+- (void)docsetSelected:(id)sender;
+-(void)setDocsetSelector:(id)sender;
+- (void)makeSegment:(NSDictionary*)kwData;
 @end
 
 @protocol SearchResultsViewControllerDelegate <NSObject>

@@ -28,6 +28,7 @@
     DictionaryViewController* dictionaryViewController;
     NSPopover* dictionaryPopover;
     NSSpeechSynthesizer* speech;
+    IBOutlet NSSegmentedControl* docsetSelector;
 }
 
 @property (nonatomic, strong) IBOutlet NSMutableArray *nodes;
@@ -39,6 +40,8 @@
 - (IBAction)updateFilter:sender;
 - (IBAction)Setting:(id)sender;
 - (IBAction)dictionary:(id)sender;
+- (IBAction)docsetSelected:(id)sender;
+
 -(void)showDictionaryView;
 -(NSSpeechSynthesizer*)speech;
 

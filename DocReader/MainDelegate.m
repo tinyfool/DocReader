@@ -109,11 +109,12 @@
 
     NSSearchField *searchField = [notification object];
     NSString* word = [searchField stringValue];
-    
+
     if (!searchResultsViewController) {
     
         searchResultsViewController = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsView" bundle:nil];
         searchResultsViewController.delegate = self;
+        [searchResultsViewController setDocsetSelector:docsetSelector];
     }
     if (!searchPopover) {
         
@@ -140,12 +141,12 @@
             [results addObject:aResults];
             [oLdresults addObjectsFromArray:aResults];
         }
-        NSArray* combineResults = [DocSet combineSearchResults:results];
+        NSArray* combineResults = [DocSet combineSearchResults:oLdresults];
         NSLog(@"%@",results);
         NSLog(@"%@",combineResults);
         dispatch_async(dispatch_get_main_queue(),^{
             
-            searchResultsViewController.results = oLdresults;
+            searchResultsViewController.results = combineResults;
             [searchResultsViewController.resultsTableview reloadData];
         });
     }]];
@@ -181,6 +182,7 @@
         
         [dictionaryPopover showRelativeToRect:self.dictionaryButton.bounds ofView:self.dictionaryButton preferredEdge:NSMinYEdge];
     }
+    [dictionaryViewController setWord:@"" andDefinition:@""];
 }
 
 - (IBAction)dictionary:(id)sender {
@@ -217,6 +219,14 @@
     NSString* newWord = [word substringWithRange:NSMakeRange(range.location, range.length)];
     if (dictionaryViewController)
         [dictionaryViewController setWord:newWord andDefinition:result];
+}
+
+- (IBAction)docsetSelected:(id)sender {
+
+    if (searchResultsViewController) {
+        
+        [searchResultsViewController docsetSelected:sender];
+    }
 }
 
 @end

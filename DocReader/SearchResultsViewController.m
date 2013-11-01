@@ -87,7 +87,8 @@
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
 
-    id ret = [results objectAtIndex:row];
+    NSDictionary* kwDict = [results objectAtIndex:row];
+    id ret = [kwDict objectForKey:[[kwDict allKeys] objectAtIndex:0]];
     NSString* type = [ret objectForKey:@"ZTYPENAME"];
     NSString* typename = [self readableTypeNameForDatabaseType:type];
     NSString* filename =  [self imageFileNameForDatabaseType:type];
@@ -107,8 +108,30 @@
     }
 }
 
+- (void)makeSegment:(NSDictionary*)kwData {
+
+    NSArray* keys = [kwData allKeys];
+    NSMutableArray* returnArray = [NSMutableArray array];
+    [docsetSelector setSegmentCount:[keys count]];
+    int n = 0;
+    for (NSString* key in keys) {
+        
+        NSDictionary* line = [kwData objectForKey:key];
+        [returnArray addObject:line];
+        DocSet* docset = [line objectForKey:@"DocSet"];
+        [docsetSelector setLabel:docset.name forSegment:n];
+        [docsetSelector setWidth:100 forSegment:n];
+        n++;
+    }
+    docsetSelector.selectedSegment = 0;
+    segmentArray = returnArray;
+}
+
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
-    NSDictionary* data = [results objectAtIndex:row];
+    
+    NSDictionary* kwData = [results objectAtIndex:row];
+    [self makeSegment:kwData];
+    NSDictionary* data = [kwData objectForKey:[[kwData allKeys] objectAtIndex:0]];
     NSString* nodeid = [data objectForKey:@"ZPARENTNODE"];
     DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithNodeID:nodeid];
     if ([self.delegate respondsToSelector:@selector(searchResultsViewController:didSelectedItem:)]) {
@@ -117,4 +140,19 @@
     return YES;
 }
 
+-(void)setDocsetSelector:(id)sender {
+
+    docsetSelector = sender;
+}
+
+- (void)docsetSelected:(id)sender {
+    
+    NSInteger sel = docsetSelector.selectedSegment;
+    NSDictionary* data = [segmentArray objectAtIndex:sel];
+    NSString* nodeid = [data objectForKey:@"ZPARENTNODE"];
+    DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithNodeID:nodeid];
+    if ([self.delegate respondsToSelector:@selector(searchResultsViewController:didSelectedItem:)]) {
+        [self.delegate searchResultsViewController:self didSelectedItem:topic];
+    }
+}
 @end

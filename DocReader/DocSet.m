@@ -182,7 +182,28 @@
 +(NSArray*)combineSearchResults:(NSArray*)results {
 
     NSLog(@"%@",results);
-    return nil;
+    NSMutableDictionary* kwDict = [NSMutableDictionary dictionary];
+    NSMutableArray* cResults = [NSMutableArray array];
+    
+    for (NSDictionary* result in results) {
+        
+        NSString* token = [result objectForKey:@"ZTOKENNAME"];
+        NSMutableDictionary* lineData;
+        if (![kwDict objectForKey:token]) {
+            
+            lineData = [NSMutableDictionary dictionary];
+            [cResults addObject:lineData];
+            NSNumber* index  = [NSNumber numberWithInteger:[cResults count] -1];
+            [kwDict setObject:index forKey:token];
+        }else {
+            
+            int line = [[kwDict objectForKey:token] intValue];
+            lineData = [cResults objectAtIndex:line];
+        }
+        DocSet* docset = [result objectForKey:@"DocSet"];
+        [lineData setObject:result forKey:docset.name];
+    }
+    return cResults;
 }
 
 @end

@@ -651,35 +651,35 @@
         <window title="DocReader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="373" y="237" width="559" height="498"/>
+            <rect key="contentRect" x="373" y="237" width="570" height="498"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="559" height="498"/>
+                <rect key="frame" x="0.0" y="0.0" width="570" height="498"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-gi-5l2">
-                        <rect key="frame" x="0.0" y="0.0" width="559" height="498"/>
+                        <rect key="frame" x="0.0" y="0.0" width="570" height="498"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="0np-rl-QDZ">
-                                <rect key="frame" x="0.0" y="0.0" width="117" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyv-5k-Vcx">
-                                        <rect key="frame" x="0.0" y="0.0" width="117" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="119.5" height="498"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" id="68L-3e-mqL">
-                                            <rect key="frame" x="1" y="1" width="115" height="496"/>
+                                            <rect key="frame" x="1" y="1" width="117.5" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="EOF-6H-51f" id="OD1-DO-F1a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="496"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="118" height="496"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="112" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
+                                                        <tableColumn width="114.5" minWidth="16" maxWidth="1000" id="EOF-6H-51f">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -704,7 +704,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="tTq-JT-uMx">
-                                            <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                                            <rect key="frame" x="1" y="481" width="116.5" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="eKh-4Q-A1z">
@@ -721,20 +721,35 @@
                                 </constraints>
                             </customView>
                             <customView id="eaI-0t-VeQ">
-                                <rect key="frame" x="127" y="0.0" width="432" height="498"/>
+                                <rect key="frame" x="130" y="0.0" width="440" height="498"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="37X-St-1GJ" customClass="DocNavWebview">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="440.5" height="458"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                             <nil key="identifier"/>
                                         </webPreferences>
                                     </webView>
+                                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXg-wQ-9PF">
+                                        <rect key="frame" x="18" y="464" width="328" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" alignment="left" style="capsule" trackingMode="selectOne" id="HcU-C3-x4S">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment width="322">
+                                                    <nil key="label"/>
+                                                </segment>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="docsetSelected:" target="cJE-qd-r65" id="r7f-5W-5Vc"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="37X-St-1GJ" firstAttribute="leading" secondItem="eaI-0t-VeQ" secondAttribute="leading" id="QYf-F7-Buk"/>
-                                    <constraint firstItem="37X-St-1GJ" firstAttribute="top" secondItem="eaI-0t-VeQ" secondAttribute="top" id="Uv7-qi-q7U"/>
+                                    <constraint firstItem="37X-St-1GJ" firstAttribute="top" secondItem="eaI-0t-VeQ" secondAttribute="top" constant="40" id="Uv7-qi-q7U"/>
                                     <constraint firstAttribute="bottom" secondItem="37X-St-1GJ" secondAttribute="bottom" id="Wvx-r0-qOm"/>
                                     <constraint firstAttribute="trailing" secondItem="37X-St-1GJ" secondAttribute="trailing" id="o2I-GR-Zzd"/>
                                 </constraints>
@@ -826,6 +841,7 @@
                 <outlet property="dictionary" destination="pSB-oY-vk5" id="cXq-Ge-2T7"/>
                 <outlet property="dictionaryButton" destination="LhH-3G-g9q" id="RPP-n3-uR6"/>
                 <outlet property="docWebview" destination="37X-St-1GJ" id="Y7e-k8-1Yu"/>
+                <outlet property="docsetSelector" destination="pXg-wQ-9PF" id="a18-b8-BRi"/>
                 <outlet property="outlineView" destination="OD1-DO-F1a" id="yVP-HH-iWD"/>
                 <outlet property="settingWindow" destination="aGI-8F-Oi5" id="1Wf-1W-5vB"/>
                 <outlet property="treeController" destination="043-8f-JXD" id="kAL-H8-vXo"/>
