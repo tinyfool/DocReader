@@ -181,7 +181,6 @@
 
 +(NSArray*)combineSearchResults:(NSArray*)results {
 
-    NSLog(@"%@",results);
     NSMutableDictionary* kwDict = [NSMutableDictionary dictionary];
     NSMutableArray* cResults = [NSMutableArray array];
     

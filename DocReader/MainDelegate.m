@@ -134,16 +134,12 @@
         searchQueue = [[NSOperationQueue alloc] init];
     }
     [searchQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
-        NSMutableArray* oLdresults = [NSMutableArray array];
         NSMutableArray* results = [NSMutableArray array];
         for (DocSet* aDocSet in rootNode.docSetArray) {
             NSArray *aResults = [aDocSet search:word];
-            [results addObject:aResults];
-            [oLdresults addObjectsFromArray:aResults];
+            [results addObjectsFromArray:aResults];
         }
-        NSArray* combineResults = [DocSet combineSearchResults:oLdresults];
-        NSLog(@"%@",results);
-        NSLog(@"%@",combineResults);
+        NSArray* combineResults = [DocSet combineSearchResults:results];
         dispatch_async(dispatch_get_main_queue(),^{
             
             searchResultsViewController.results = combineResults;

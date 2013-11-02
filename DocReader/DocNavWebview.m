@@ -13,7 +13,6 @@
 
 - (void)keyDown:(NSEvent *)theEvent {
     
-    NSLog(@"%@",theEvent);
     DOMRange *ff = [self selectedDOMRange];
     
     NSString *word = [ff text];

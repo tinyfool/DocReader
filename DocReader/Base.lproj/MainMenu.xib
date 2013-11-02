@@ -673,7 +673,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="EOF-6H-51f" id="OD1-DO-F1a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="118" height="496"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="117.5" height="496"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -731,7 +731,7 @@
                                             <nil key="identifier"/>
                                         </webPreferences>
                                     </webView>
-                                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXg-wQ-9PF">
+                                    <segmentedControl hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXg-wQ-9PF">
                                         <rect key="frame" x="18" y="464" width="328" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" alignment="left" style="capsule" trackingMode="selectOne" id="HcU-C3-x4S">

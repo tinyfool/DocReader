@@ -111,6 +111,11 @@
 - (void)makeSegment:(NSDictionary*)kwData {
 
     NSArray* keys = [kwData allKeys];
+    if ([keys count]==1) {
+        [docsetSelector setHidden:YES];
+        return;
+    }
+    [docsetSelector setHidden:NO];
     NSMutableArray* returnArray = [NSMutableArray array];
     [docsetSelector setSegmentCount:[keys count]];
     int n = 0;
