@@ -28,6 +28,7 @@
 		BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F41808638A00C00FA0 /* DocNavTreeDocsetNode.m */; };
 		BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */; };
 		BD4721FA1808D8E300C00FA0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */; };
+		BD60698B18249892007014F4 /* TDBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD60698A18249892007014F4 /* TDBarView.m */; };
 		BD6150FB180E32F300F655BE /* SearchResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6150FA180E32F300F655BE /* SearchResultsView.xib */; };
 		BD6150FE180E331F00F655BE /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6150FD180E331F00F655BE /* SearchResultsViewController.m */; };
 		BD63FBD0180CDAD100905F36 /* DocSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BD63FBCF180CDAD100905F36 /* DocSet.m */; };
@@ -86,6 +87,8 @@
 		BD4721F61808668600C00FA0 /* DocNavTreeTopicNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeTopicNode.h; sourceTree = "<group>"; };
 		BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeTopicNode.m; sourceTree = "<group>"; };
 		BD4721F91808D8E300C00FA0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BD60698918249892007014F4 /* TDBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBarView.h; sourceTree = "<group>"; };
+		BD60698A18249892007014F4 /* TDBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBarView.m; sourceTree = "<group>"; };
 		BD6150FA180E32F300F655BE /* SearchResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsView.xib; sourceTree = "<group>"; };
 		BD6150FC180E331F00F655BE /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
 		BD6150FD180E331F00F655BE /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 		BD6150FF180E332C00F655BE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BD60698918249892007014F4 /* TDBarView.h */,
+				BD60698A18249892007014F4 /* TDBarView.m */,
 				BD35AD2F1821E82C0000C6C9 /* DictionaryViewController.h */,
 				BD35AD301821E82C0000C6C9 /* DictionaryViewController.m */,
 				BD35AD311821E82C0000C6C9 /* DictionaryViewController.xib */,
@@ -387,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD60698B18249892007014F4 /* TDBarView.m in Sources */,
 				BDF5143E180FA62700CFA97B /* NSString+UrlEncode.m in Sources */,
 				BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */,
 				BD35AD321821E82C0000C6C9 /* DictionaryViewController.m in Sources */,

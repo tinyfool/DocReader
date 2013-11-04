@@ -71,6 +71,8 @@
     id node = [item representedObject];
     
     if ([[node class] isSubclassOfClass:[DocNavTreeTopicNode class]]) {
+        
+        [self.docWebview showCatalog:NO];
         [self loadContentOfTopic:node];
     }
     return YES;
@@ -114,6 +116,7 @@
     
         searchResultsViewController = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsView" bundle:nil];
         searchResultsViewController.delegate = self;
+        searchResultsViewController.navWebview = self.docWebview;
         [searchResultsViewController setDocsetSelector:docsetSelector];
     }
     if (!searchPopover) {

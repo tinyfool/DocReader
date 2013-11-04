@@ -7,11 +7,22 @@
 //
 
 #import "DocNavWebview.h"
+#import "TDBarView.h"
 
 @implementation DocNavWebview
 @synthesize docNavWebviewDelegate;
 
 - (void)keyDown:(NSEvent *)theEvent {
+    
+    
+    if ([theEvent modifierFlags] & NSCommandKeyMask) {
+        
+        if ([theEvent.characters isEqualToString:@"f"]) {
+            
+            [self showSearch:YES];
+        }
+        return;
+    }
     
     DOMRange *ff = [self selectedDOMRange];
     
@@ -30,4 +41,43 @@
     }
 }
 
+-(TDBarView*)inPageSearchViewController {
+    
+    if (!inPageSearchViewController) {
+        
+    }
+    return inPageSearchViewController;
+}
+
+-(void)showCatalog:(BOOL)show{
+
+    if (show)
+        [catalogBar setHidden:NO];
+    else
+        [catalogBar setHidden:YES];
+    [self updateContentsConstraints];
+
+}
+
+-(void)showSearch:(BOOL)show {
+
+    
+}
+
+-(void)updateContentsConstraints {
+
+    CGFloat c1 = 0;
+    CGFloat c2 = 0;
+    
+    if ([catalogBar isHidden])
+        c1 = 0;
+    else
+        c1 = 33;
+    if ([inPageSearchBar isHidden])
+        c2 = 0;
+    else
+        c2 = 33;
+    inPageSearchBarTopConstraint.constant = c1;
+    webviewTopConstraint.constant = c1 + c2;
+}
 @end

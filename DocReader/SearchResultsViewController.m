@@ -9,12 +9,14 @@
 #import "SearchResultsViewController.h"
 #import "DocSet.h"
 #import "DocSetTopic.h"
+#import "DocNavWebview.h"
 
 @interface SearchResultsViewController ()
 
 @end
 
 @implementation SearchResultsViewController
+@synthesize navWebview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -113,9 +115,11 @@
     NSArray* keys = [kwData allKeys];
     if ([keys count]==1) {
         [docsetSelector setHidden:YES];
+        [self.navWebview showCatalog:NO];
         return;
     }
     [docsetSelector setHidden:NO];
+    [self.navWebview showCatalog:YES];
     NSMutableArray* returnArray = [NSMutableArray array];
     [docsetSelector setSegmentCount:[keys count]];
     int n = 0;
@@ -148,6 +152,11 @@
 -(void)setDocsetSelector:(id)sender {
 
     docsetSelector = sender;
+}
+
+-(void)setCatalogBarView:(id)sender {
+
+    catalogBarView = sender;
 }
 
 - (void)docsetSelected:(id)sender {
