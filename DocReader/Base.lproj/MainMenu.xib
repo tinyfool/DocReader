@@ -734,6 +734,7 @@
                                             <outlet property="catalogBar" destination="ugt-N1-L6z" id="woX-sA-3qF"/>
                                             <outlet property="inPageSearchBar" destination="NVt-Jy-miZ" id="APg-nU-0Qc"/>
                                             <outlet property="inPageSearchBarTopConstraint" destination="FU4-0p-L78" id="4Br-C0-VNg"/>
+                                            <outlet property="inPageSearchField" destination="Xgi-He-kcB" id="Jfo-fP-HIA"/>
                                             <outlet property="webviewTopConstraint" destination="zhs-vU-Ano" id="HWv-FR-eoV"/>
                                         </connections>
                                     </webView>
@@ -776,6 +777,9 @@
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </searchFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="37X-St-1GJ" id="XJV-2x-ttx"/>
+                                                </connections>
                                             </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UCL-Y9-toi">
                                                 <rect key="frame" x="455" y="-1" width="54" height="32"/>

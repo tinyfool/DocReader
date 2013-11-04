@@ -10,7 +10,7 @@
 @protocol DocNavWebviewDelegate;
 @class TDBarView;
 
-@interface DocNavWebview : WebView {
+@interface DocNavWebview : WebView <NSControlTextEditingDelegate>{
     
     NSSpeechSynthesizer* speech;
     TDBarView* inPageSearchViewController;
@@ -18,6 +18,8 @@
     IBOutlet NSLayoutConstraint* inPageSearchBarTopConstraint;
     IBOutlet NSView* catalogBar;
     IBOutlet NSView* inPageSearchBar;
+    IBOutlet NSSearchField* inPageSearchField;
+    BOOL canNotSpeaking;
 }
 
 @property id<DocNavWebviewDelegate> docNavWebviewDelegate;

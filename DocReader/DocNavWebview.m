@@ -15,15 +15,17 @@
 - (void)keyDown:(NSEvent *)theEvent {
     
     
-    if ([theEvent modifierFlags] & NSCommandKeyMask) {
-        
-        if ([theEvent.characters isEqualToString:@"f"]) {
-            
-            [self showSearch:YES];
-        }
+//    if ([theEvent modifierFlags] & NSCommandKeyMask) {
+//        
+//        if ([theEvent.characters isEqualToString:@"f"]) {
+//            
+//            [self showSearch:YES];
+//        }
+//        return;
+//    }
+    if (canNotSpeaking) {
         return;
     }
-    
     DOMRange *ff = [self selectedDOMRange];
     
     NSString *word = [ff text];
@@ -61,7 +63,13 @@
 
 -(void)showSearch:(BOOL)show {
 
-    
+    if ([inPageSearchBar isHidden]) {
+        [inPageSearchBar setHidden:NO];
+        [inPageSearchField becomeFirstResponder];
+    }
+    else
+        [inPageSearchBar setHidden:YES];
+    [self updateContentsConstraints];
 }
 
 -(void)updateContentsConstraints {
@@ -80,4 +88,40 @@
     inPageSearchBarTopConstraint.constant = c1;
     webviewTopConstraint.constant = c1 + c2;
 }
+
+- (void)controlTextDidChange:(NSNotification *)notification {
+
+    NSSearchField *searchField = [notification object];
+    NSString* word = [searchField stringValue];
+    BOOL found = [self searchFor:word direction:YES caseSensitive:NO wrap:YES];
+    if (found) {
+        
+        [self stringByEvaluatingJavaScriptFromString:
+         @"var sel = window.getSelection();\
+         if (!sel.isCollapsed) {\
+             var selRange = sel.getRangeAt(0);\
+             document.designMode = \"on\";\
+             sel.removeAllRanges();\
+             sel.addRange(selRange);\
+             document.execCommand(\"HiliteColor\", false, \"#ffffcc\");\
+             sel.removeAllRanges();\
+             document.designMode = \"off\";\
+         }\
+         "];
+    }
+    [searchField becomeFirstResponder];
+    [[searchField currentEditor] moveToEndOfLine:nil];
+}
+
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor {
+    
+    canNotSpeaking = YES;
+    return YES;
+}
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
+
+    canNotSpeaking = NO;
+    return YES;
+}
+
 @end
