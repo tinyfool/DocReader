@@ -234,17 +234,21 @@
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
     if (self.penddingAnchor) {
+         
         DOMNode *AnchorNode = [frame.DOMDocument.anchors namedItem:self.penddingAnchor];
         if (AnchorNode) {
             NSString *penddingAnchor = [self.penddingAnchor copy];
             NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",penddingAnchor];
             self.penddingAnchor = nil;
-            
-            // Direct call javascript can't correct jump to anchor
-            // call it in next run loop
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
-            }];
+            NSOperationQueue* backOperationQueue = [[NSOperationQueue alloc] init];
+            [backOperationQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+                
+                [NSThread sleepForTimeInterval:0.1];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    
+                    [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+                    }];
+                }]];
         }
     }
 }
