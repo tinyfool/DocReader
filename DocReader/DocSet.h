@@ -25,6 +25,7 @@
 - (NSArray*)runSql:(NSString*)sql;
 -(NSArray*)topicsWithParent:(DocSetTopic*)parent;
 -(DocSetTopic*)topicWithNodeID:(NSString*)nodeID;
+-(DocSetTopic*)topicWithSearchResult:(NSDictionary*)result;
 -(NSArray*)search:(NSString*)word;
 +(NSArray*)combineSearchResults:(NSArray*)results;
 @end

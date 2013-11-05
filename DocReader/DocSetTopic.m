@@ -52,6 +52,9 @@
                 return nil;
         }
     }
+    if (!anchor) {
+        anchor = [info objectForKey:@"ZKANCHOR"];
+    }
     NSString* fullPath = [[docSet.path stringByAppendingPathComponent:@"Contents/Resources/Documents"] stringByAppendingPathComponent:path];
     NSMutableDictionary* urlInfo = [[NSMutableDictionary alloc] initWithCapacity:3];
     if (anchor) {

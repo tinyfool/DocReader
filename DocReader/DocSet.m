@@ -114,6 +114,7 @@
 	sqlite3_finalize(statement);
 	return ret;
 }
+
 -(DocSetTopic*)topicWithNodeID:(NSString*)nodeID {
     
     NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODE WHERE Z_PK = %@;",nodeID];
@@ -121,6 +122,34 @@
     if(!results)
         return nil;
     DocSetTopic* topic = [[DocSetTopic alloc] initWithDict:[results objectAtIndex:0] andDocSet:self];
+    return topic;
+}
+
+-(DocSetTopic*)topicWithSearchResult:(NSDictionary*)result {
+
+    NSMutableDictionary* topicDict;
+    NSString* ZPK_PARENTNODE = [result objectForKey:@"ZPARENTNODE"];
+    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZNODE WHERE Z_PK = %@;",ZPK_PARENTNODE];
+    NSArray* results = [self runSql:sql];
+    if(!results)
+        return nil;
+    topicDict = [[results objectAtIndex:0] mutableCopy];
+    
+    NSString* ZMETAINFORMATION_PK = [result objectForKey:@"ZMETAINFORMATION"];
+    if (ZMETAINFORMATION_PK) {
+        NSString* sql = [NSString stringWithFormat:@"SELECT * FROM ZTOKENMETAINFORMATION WHERE Z_PK = %@;",ZMETAINFORMATION_PK];
+        NSArray* ret = [self runSql:sql];
+        if (ret) {
+            
+            NSDictionary* metaInformation = [ret objectAtIndex:0];
+            NSString* ZANCHOR = [metaInformation objectForKey:@"ZANCHOR"];
+            if (ZANCHOR) {
+                
+                [topicDict setObject:ZANCHOR forKey:@"ZKANCHOR"];
+            }
+        }
+    }
+    DocSetTopic* topic = [[DocSetTopic alloc] initWithDict:topicDict andDocSet:self];
     return topic;
 }
 

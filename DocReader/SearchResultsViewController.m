@@ -141,8 +141,7 @@
     NSDictionary* kwData = [results objectAtIndex:row];
     [self makeSegment:kwData];
     NSDictionary* data = [kwData objectForKey:[[kwData allKeys] objectAtIndex:0]];
-    NSString* nodeid = [data objectForKey:@"ZPARENTNODE"];
-    DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithNodeID:nodeid];
+    DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithSearchResult:data];
     if ([self.delegate respondsToSelector:@selector(searchResultsViewController:didSelectedItem:)]) {
         [self.delegate searchResultsViewController:self didSelectedItem:topic];
     }
@@ -163,8 +162,7 @@
     
     NSInteger sel = docsetSelector.selectedSegment;
     NSDictionary* data = [segmentArray objectAtIndex:sel];
-    NSString* nodeid = [data objectForKey:@"ZPARENTNODE"];
-    DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithNodeID:nodeid];
+    DocSetTopic* topic = [[data objectForKey:@"DocSet"] topicWithSearchResult:data];
     if ([self.delegate respondsToSelector:@selector(searchResultsViewController:didSelectedItem:)]) {
         [self.delegate searchResultsViewController:self didSelectedItem:topic];
     }
