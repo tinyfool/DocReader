@@ -17,7 +17,7 @@
 #import "DocNavWebview.h"
 
 @interface MainDelegate () <SearchResultsViewControllerDelegate>
-
+@property (nonatomic, strong) NSString *penddingAnchor;
 @end
 
 #define USER_docSetPaths @"USER_docSetPaths"
@@ -27,6 +27,7 @@
 {
     [self reloadData];
     self.docWebview.DocNavWebviewDelegate = self;
+    [self.docWebview setFrameLoadDelegate:self];
 }
 
 - (void)reloadData
@@ -95,6 +96,8 @@
     }
     
     if (fileURL) {
+        self.penddingAnchor = anchor;
+
         NSString *currentPath = self.docWebview.mainFrame.dataSource.request.URL.path;
         if (![currentPath isEqualToString:fileURL.path]) {
             [[self.docWebview mainFrame] loadRequest:[NSURLRequest requestWithURL:fullURL]];
@@ -228,4 +231,21 @@
     }
 }
 
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+    if (self.penddingAnchor) {
+        DOMNode *AnchorNode = [frame.DOMDocument.anchors namedItem:self.penddingAnchor];
+        if (AnchorNode) {
+            NSString *penddingAnchor = [self.penddingAnchor copy];
+            NSString* js = [NSString stringWithFormat:@"window.location.href = '#%@';",penddingAnchor];
+            self.penddingAnchor = nil;
+            
+            // Direct call javascript can't correct jump to anchor
+            // call it in next run loop
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.docWebview stringByEvaluatingJavaScriptFromString:js];
+            }];
+        }
+    }
+}
 @end
