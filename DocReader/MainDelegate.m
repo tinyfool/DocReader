@@ -173,6 +173,7 @@
     if (!dictionaryViewController) {
         
         dictionaryViewController = [[DictionaryViewController alloc] initWithNibName:@"DictionaryViewController" bundle:nil];
+        [dictionaryViewController setSpeech:[self speech]];
     }
     if (!dictionaryPopover) {
         

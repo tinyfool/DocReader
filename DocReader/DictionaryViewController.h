@@ -13,8 +13,10 @@
     IBOutlet NSSearchField* searchField;
     IBOutlet NSTextView* textView;
     IBOutlet NSArrayController* arrayController;
+    NSSpeechSynthesizer* speech;
 }
 -(void)setWord:(NSString*)word andDefinition:(NSString*)definition;
 -(NSString*)formatDefinition:(NSString*)definition withWord:(NSString*)word;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+-(void)setSpeech:(NSSpeechSynthesizer*)newSpeech;
 @end

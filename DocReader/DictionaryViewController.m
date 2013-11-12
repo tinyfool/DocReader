@@ -26,6 +26,11 @@
     return self;
 }
 
+-(void)setSpeech:(NSSpeechSynthesizer*)newSpeech {
+
+    speech = newSpeech;
+}
+
 - (BOOL)validateMyAttribute:(NSString *)value{
     // Return NO if there is already an object with a myAtribute of value
     
@@ -77,12 +82,13 @@
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
 
-    NewWords* object = [arrayController.selectedObjects firstObject];
+    NewWords* object = [arrayController.arrangedObjects objectAtIndex:row];
     NSString* word = object.word;
     CFRange range = DCSGetTermRangeInString(NULL,(__bridge CFStringRef)word,0);
     NSString* result =  (__bridge NSString *)(DCSCopyTextDefinition(NULL,(__bridge CFStringRef)word,range));
     NSString* newWord = [word substringWithRange:NSMakeRange(range.location, range.length)];
     [self setWord:newWord andDefinition:result];
+    [speech startSpeakingString:word];
     return YES;
 }
 @end
