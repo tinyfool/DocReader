@@ -12,17 +12,39 @@
 @implementation DocNavWebview
 @synthesize docNavWebviewDelegate;
 
+
+
 - (void)keyDown:(NSEvent *)theEvent {
     
     
-//    if ([theEvent modifierFlags] & NSCommandKeyMask) {
-//        
-//        if ([theEvent.characters isEqualToString:@"f"]) {
-//            
-//            [self showSearch:YES];
-//        }
-//        return;
-//    }
+    
+    if ([theEvent modifierFlags] & NSCommandKeyMask) {
+        
+        float textSize;
+        textSize = [self textSizeMultiplier];
+        if ([theEvent.characters isEqualToString:@"f"]) {
+            
+            [self showSearch:YES];
+        } else if ([theEvent.characters isEqualToString:@"="]) {
+        
+            textSize = textSize * 1.2;
+            [self setTextSizeMultiplier:textSize];
+            
+            //once think about method blow
+            //http://stackoverflow.com/questions/13192385/scale-html-content-in-webview
+            //but this method did scale webview, but mouse selection position has offset...
+        } else if ([theEvent.characters isEqualToString:@"-"]) {
+        
+            textSize = textSize/1.2;
+            [self setTextSizeMultiplier:textSize];
+
+        } else if ([theEvent.characters isEqualToString:@"0"]) {
+            
+            textSize = 1.0;
+            [self setTextSizeMultiplier:textSize];
+        }
+        return;
+    }
     if (canNotSpeaking) {
         return;
     }
