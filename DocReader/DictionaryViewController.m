@@ -37,8 +37,8 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:@"NewWords" inManagedObjectContext:self.managedObjectContext];
     request.predicate = [NSPredicate predicateWithFormat:@"word = %@", value];
-    NewWords* existWord = [[self.managedObjectContext executeFetchRequest:request error:nil] firstObject];
-    if (existWord) {
+    NSArray* existWord = [self.managedObjectContext executeFetchRequest:request error:nil];
+    if ([existWord count]>0) {
         return NO;
     }
     return YES;
