@@ -1,0 +1,3 @@
+[submodule "External/HighlightedWebView"]
+	path = External/HighlightedWebView
+	url = https://github.com/Kapeli/HighlightedWebView.git
