@@ -35,6 +35,10 @@
 
 -(IBAction)inPageSearchPrev:(id)sender;
 -(IBAction)inPageSearchNext:(id)sender;
+
+-(IBAction)zoomIn:(id)sender;
+-(IBAction)zoomOut:(id)sender;
+-(IBAction)resetZoom:(id)sender;
 @end
 
 @protocol DocNavWebviewDelegate <NSObject>

@@ -14,56 +14,6 @@
 @synthesize docNavWebviewDelegate;
 @synthesize canNotSpeaking;
 
-//- (void)keyDown:(NSEvent *)theEvent {
-    
-    
-//    if ([theEvent modifierFlags] & NSCommandKeyMask) {
-//        
-//        float textSize;
-//        textSize = [self textSizeMultiplier];
-//        if ([theEvent.characters isEqualToString:@"f"]) {
-//            
-//            [self showSearch:self];
-//        } else if ([theEvent.characters isEqualToString:@"="]) {
-//        
-//            textSize = textSize * 1.2;
-//            [self setTextSizeMultiplier:textSize];
-//            
-//            //once think about method blow
-//            //http://stackoverflow.com/questions/13192385/scale-html-content-in-webview
-//            //but this method did scale webview, but mouse selection position has offset...
-//        } else if ([theEvent.characters isEqualToString:@"-"]) {
-//        
-//            textSize = textSize/1.2;
-//            [self setTextSizeMultiplier:textSize];
-//
-//        } else if ([theEvent.characters isEqualToString:@"0"]) {
-//            
-//            textSize = 1.0;
-//            [self setTextSizeMultiplier:textSize];
-//        }
-//        return;
-//    }
-//    if (canNotSpeaking) {
-//        return;
-//    }
-//    DOMRange *ff = [self selectedDOMRange];
-//    
-//    NSString *word = [ff text];
-//    if ([word length]==0)
-//        return;
-//    
-//    if (self.docNavWebviewDelegate && [self.docNavWebviewDelegate conformsToProtocol:@protocol(DocNavWebviewDelegate)]) {
-//        
-//        if ([theEvent.characters isEqualToString:@"a"])
-//            [self.docNavWebviewDelegate speak:word];
-//        else if([theEvent.characters isEqualToString:@"s"])
-//            [self.docNavWebviewDelegate showDictionary:word];
-//        else if (([theEvent.characters isEqualToString:@"d"]))
-//            [self.docNavWebviewDelegate translate:word];
-//    }
-//}
-
 -(TDBarView*)inPageSearchViewController {
     
     if (!inPageSearchViewController) {
@@ -138,6 +88,38 @@
 
     canNotSpeaking = NO;
     return YES;
+}
+
+-(float)zoomLevel {
+
+    float zoomLevel;
+    NSString* jsReturnStr = [self stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.zoom"];
+    zoomLevel = [jsReturnStr floatValue];
+    if (zoomLevel<0.0001) {
+        zoomLevel = 1;
+    }
+    return zoomLevel;
+}
+
+-(IBAction)zoomIn:(id)sender {
+
+    float zoomLevel = [self zoomLevel]/1.2;
+    NSString* js = [NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";",zoomLevel];
+    [self stringByEvaluatingJavaScriptFromString:js];
+}
+
+-(IBAction)zoomOut:(id)sender {
+
+    float zoomLevel = [self zoomLevel]*1.2;
+    NSString* js = [NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";",zoomLevel];
+    [self stringByEvaluatingJavaScriptFromString:js];
+}
+
+-(IBAction)resetZoom:(id)sender {
+
+    float zoomLevel = 1;
+    NSString* js = [NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";",zoomLevel];
+    [self stringByEvaluatingJavaScriptFromString:js];
 }
 
 @end

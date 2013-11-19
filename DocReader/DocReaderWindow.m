@@ -15,28 +15,18 @@
     
     if ([theEvent modifierFlags] & NSCommandKeyMask) {
         
-        float textSize;
-        textSize = [webview textSizeMultiplier];
         if ([theEvent.characters isEqualToString:@"f"]) {
             
             [webview showSearch:self];
         } else if ([theEvent.characters isEqualToString:@"="]) {
             
-            textSize = textSize * 1.2;
-            [webview setTextSizeMultiplier:textSize];
-            
-            //once think about method blow
-            //http://stackoverflow.com/questions/13192385/scale-html-content-in-webview
-            //but this method did scale webview, but mouse selection position has offset...
+            [webview zoomOut:self];
         } else if ([theEvent.characters isEqualToString:@"-"]) {
             
-            textSize = textSize/1.2;
-            [webview setTextSizeMultiplier:textSize];
-            
+            [webview zoomIn:self];
         } else if ([theEvent.characters isEqualToString:@"0"]) {
             
-            textSize = 1.0;
-            [webview setTextSizeMultiplier:textSize];
+            [webview resetZoom:self];
         }
         return;
     }
