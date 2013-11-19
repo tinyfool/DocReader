@@ -7,10 +7,12 @@
 //
 
 #import <WebKit/WebKit.h>
+#import "DHWebView.h"
+
 @protocol DocNavWebviewDelegate;
 @class TDBarView;
 
-@interface DocNavWebview : WebView <NSControlTextEditingDelegate>{
+@interface DocNavWebview : DHWebView <NSControlTextEditingDelegate>{
     
     NSSpeechSynthesizer* speech;
     TDBarView* inPageSearchViewController;

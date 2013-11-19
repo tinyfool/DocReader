@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432F58A8183B553C00B1704A /* DHMatchedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5897183B553C00B1704A /* DHMatchedText.m */; };
+		432F58A9183B553C00B1704A /* DHScrollbarHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5899183B553C00B1704A /* DHScrollbarHighlighter.m */; };
+		432F58AA183B553C00B1704A /* DHSearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589B183B553C00B1704A /* DHSearchQuery.m */; };
+		432F58AB183B553C00B1704A /* DHWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589D183B553C00B1704A /* DHWebView.m */; };
 		BD127776180A6EC800246E14 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD127775180A6EC800246E14 /* WebKit.framework */; };
 		BD127779180B8E1F00246E14 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127778180B8E1F00246E14 /* setting.png */; };
 		BD127782180B94F700246E14 /* SettingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127781180B94F700246E14 /* SettingWindow.m */; };
@@ -54,6 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		432F5896183B553C00B1704A /* DHMatchedText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHMatchedText.h; sourceTree = "<group>"; };
+		432F5897183B553C00B1704A /* DHMatchedText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHMatchedText.m; sourceTree = "<group>"; };
+		432F5898183B553C00B1704A /* DHScrollbarHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScrollbarHighlighter.h; sourceTree = "<group>"; };
+		432F5899183B553C00B1704A /* DHScrollbarHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScrollbarHighlighter.m; sourceTree = "<group>"; };
+		432F589A183B553C00B1704A /* DHSearchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHSearchQuery.h; sourceTree = "<group>"; };
+		432F589B183B553C00B1704A /* DHSearchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSearchQuery.m; sourceTree = "<group>"; };
+		432F589C183B553C00B1704A /* DHWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHWebView.h; sourceTree = "<group>"; };
+		432F589D183B553C00B1704A /* DHWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHWebView.m; sourceTree = "<group>"; };
 		BD127775180A6EC800246E14 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		BD127778180B8E1F00246E14 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		BD127780180B94F700246E14 /* SettingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindow.h; sourceTree = "<group>"; };
@@ -135,6 +147,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432F5893183B553C00B1704A /* HighlightedWebView */ = {
+			isa = PBXGroup;
+			children = (
+				432F5896183B553C00B1704A /* DHMatchedText.h */,
+				432F5897183B553C00B1704A /* DHMatchedText.m */,
+				432F5898183B553C00B1704A /* DHScrollbarHighlighter.h */,
+				432F5899183B553C00B1704A /* DHScrollbarHighlighter.m */,
+				432F589A183B553C00B1704A /* DHSearchQuery.h */,
+				432F589B183B553C00B1704A /* DHSearchQuery.m */,
+				432F589C183B553C00B1704A /* DHWebView.h */,
+				432F589D183B553C00B1704A /* DHWebView.m */,
+			);
+			name = HighlightedWebView;
+			path = External/HighlightedWebView/HighlightedWebView;
+			sourceTree = SOURCE_ROOT;
+		};
 		BD127777180B8E1600246E14 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +234,7 @@
 		BD165BB71807CA4A0013913A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				432F5893183B553C00B1704A /* HighlightedWebView */,
 				BDF5143C180FA62700CFA97B /* NSString+UrlEncode.h */,
 				BDF5143D180FA62700CFA97B /* NSString+UrlEncode.m */,
 				BDF51437180F8BC900CFA97B /* icons */,
@@ -402,6 +431,9 @@
 				BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */,
 				BD35AD321821E82C0000C6C9 /* DictionaryViewController.m in Sources */,
 				BD4721F21808615E00C00FA0 /* DocNavTreeRootNode.m in Sources */,
+				432F58A9183B553C00B1704A /* DHScrollbarHighlighter.m in Sources */,
+				432F58A8183B553C00B1704A /* DHMatchedText.m in Sources */,
+				432F58AA183B553C00B1704A /* DHSearchQuery.m in Sources */,
 				BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */,
 				BD6150FE180E331F00F655BE /* SearchResultsViewController.m in Sources */,
 				BD165BC41807CA4A0013913A /* AppDelegate.m in Sources */,
@@ -414,6 +446,7 @@
 				BD127782180B94F700246E14 /* SettingWindow.m in Sources */,
 				BDE4409D1828C2960093CDFD /* NewWords.m in Sources */,
 				BD68E294180808E6005226B3 /* MainDelegate.m in Sources */,
+				432F58AB183B553C00B1704A /* DHWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

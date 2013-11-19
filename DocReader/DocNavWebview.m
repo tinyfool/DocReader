@@ -8,6 +8,7 @@
 
 #import "DocNavWebview.h"
 #import "TDBarView.h"
+#import "DHWebView.h"
 
 @implementation DocNavWebview
 @synthesize docNavWebviewDelegate;
