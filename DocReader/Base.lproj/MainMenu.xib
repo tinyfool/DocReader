@@ -386,7 +386,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="DocReader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+        <window title="DocReader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371" customClass="DocReaderWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="373" y="237" width="656" height="510"/>
@@ -528,6 +528,9 @@
                                                 <buttonCell key="cell" type="push" title="完成" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wa4-E1-Oht">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" size="13" name="STHeitiSC-Light"/>
+                                                    <connections>
+                                                        <action selector="showSearch:" target="37X-St-1GJ" id="OMB-Q0-R62"/>
+                                                    </connections>
                                                 </buttonCell>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LkH-FY-Qt6">
@@ -536,6 +539,9 @@
                                                 <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HrU-ej-3lh">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" size="13" name="STHeitiSC-Light"/>
+                                                    <connections>
+                                                        <action selector="inPageSearchPrev:" target="37X-St-1GJ" id="Waf-WF-zhF"/>
+                                                    </connections>
                                                 </buttonCell>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yRk-2h-Tpb">
@@ -544,6 +550,9 @@
                                                 <buttonCell key="cell" type="push" title=">" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="da7-zy-lo2">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
+                                                    <connections>
+                                                        <action selector="inPageSearchNext:" target="37X-St-1GJ" id="vFl-KK-fXX"/>
+                                                    </connections>
                                                 </buttonCell>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRN-cK-Zie">
@@ -671,6 +680,9 @@
                     <outlet property="delegate" destination="cJE-qd-r65" id="RbH-WH-r4U"/>
                 </connections>
             </toolbar>
+            <connections>
+                <outlet property="webview" destination="37X-St-1GJ" id="yGY-BL-m6F"/>
+            </connections>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>

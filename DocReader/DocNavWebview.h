@@ -22,13 +22,19 @@
     IBOutlet NSView* inPageSearchBar;
     IBOutlet NSSearchField* inPageSearchField;
     BOOL canNotSpeaking;
+    NSString* inPageSearchWord;
 }
 
 @property id<DocNavWebviewDelegate> docNavWebviewDelegate;
+@property BOOL canNotSpeaking;
+
 -(TDBarView*)inPageSearchViewController;
--(void)showSearch:(BOOL)show;
+-(IBAction)showSearch:(id)sender;
 -(void)showCatalog:(BOOL)show;
 -(void)updateContentsConstraints;
+
+-(IBAction)inPageSearchPrev:(id)sender;
+-(IBAction)inPageSearchNext:(id)sender;
 @end
 
 @protocol DocNavWebviewDelegate <NSObject>

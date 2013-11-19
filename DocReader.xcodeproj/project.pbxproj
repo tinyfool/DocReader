@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		432F58A8183B553C00B1704A /* DHMatchedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5897183B553C00B1704A /* DHMatchedText.m */; };
-		432F58A9183B553C00B1704A /* DHScrollbarHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5899183B553C00B1704A /* DHScrollbarHighlighter.m */; };
-		432F58AA183B553C00B1704A /* DHSearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589B183B553C00B1704A /* DHSearchQuery.m */; };
-		432F58AB183B553C00B1704A /* DHWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589D183B553C00B1704A /* DHWebView.m */; };
+		432F58A8183B553C00B1704A /* DHMatchedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5897183B553C00B1704A /* DHMatchedText.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		432F58A9183B553C00B1704A /* DHScrollbarHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F5899183B553C00B1704A /* DHScrollbarHighlighter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		432F58AA183B553C00B1704A /* DHSearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589B183B553C00B1704A /* DHSearchQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		432F58AB183B553C00B1704A /* DHWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432F589D183B553C00B1704A /* DHWebView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BD127776180A6EC800246E14 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD127775180A6EC800246E14 /* WebKit.framework */; };
 		BD127779180B8E1F00246E14 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127778180B8E1F00246E14 /* setting.png */; };
 		BD127782180B94F700246E14 /* SettingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127781180B94F700246E14 /* SettingWindow.m */; };
@@ -28,6 +28,7 @@
 		BD165BDE1807CA4A0013913A /* DocReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD165BDD1807CA4A0013913A /* DocReaderTests.m */; };
 		BD35AD321821E82C0000C6C9 /* DictionaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD35AD301821E82C0000C6C9 /* DictionaryViewController.m */; };
 		BD35AD331821E82C0000C6C9 /* DictionaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD35AD311821E82C0000C6C9 /* DictionaryViewController.xib */; };
+		BD440070183B5D9900D8C264 /* DocReaderWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BD44006F183B5D9900D8C264 /* DocReaderWindow.m */; };
 		BD4721F21808615E00C00FA0 /* DocNavTreeRootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F11808615E00C00FA0 /* DocNavTreeRootNode.m */; };
 		BD4721F51808638A00C00FA0 /* DocNavTreeDocsetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F41808638A00C00FA0 /* DocNavTreeDocsetNode.m */; };
 		BD4721F81808668600C00FA0 /* DocNavTreeTopicNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4721F71808668600C00FA0 /* DocNavTreeTopicNode.m */; };
@@ -93,6 +94,8 @@
 		BD35AD2F1821E82C0000C6C9 /* DictionaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryViewController.h; sourceTree = "<group>"; };
 		BD35AD301821E82C0000C6C9 /* DictionaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryViewController.m; sourceTree = "<group>"; };
 		BD35AD311821E82C0000C6C9 /* DictionaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DictionaryViewController.xib; sourceTree = "<group>"; };
+		BD44006E183B5D9900D8C264 /* DocReaderWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocReaderWindow.h; sourceTree = "<group>"; };
+		BD44006F183B5D9900D8C264 /* DocReaderWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocReaderWindow.m; sourceTree = "<group>"; };
 		BD4721F01808615E00C00FA0 /* DocNavTreeRootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeRootNode.h; sourceTree = "<group>"; };
 		BD4721F11808615E00C00FA0 /* DocNavTreeRootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocNavTreeRootNode.m; sourceTree = "<group>"; };
 		BD4721F31808638A00C00FA0 /* DocNavTreeDocsetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocNavTreeDocsetNode.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 		BD6150FF180E332C00F655BE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BD44006E183B5D9900D8C264 /* DocReaderWindow.h */,
+				BD44006F183B5D9900D8C264 /* DocReaderWindow.m */,
 				BD60698918249892007014F4 /* TDBarView.h */,
 				BD60698A18249892007014F4 /* TDBarView.m */,
 				BD35AD2F1821E82C0000C6C9 /* DictionaryViewController.h */,
@@ -435,6 +440,7 @@
 				432F58A8183B553C00B1704A /* DHMatchedText.m in Sources */,
 				432F58AA183B553C00B1704A /* DHSearchQuery.m in Sources */,
 				BD68E29718080960005226B3 /* DocNavTreeNode.m in Sources */,
+				BD440070183B5D9900D8C264 /* DocReaderWindow.m in Sources */,
 				BD6150FE180E331F00F655BE /* SearchResultsViewController.m in Sources */,
 				BD165BC41807CA4A0013913A /* AppDelegate.m in Sources */,
 				BDF787A21821D983003C1AC0 /* DocNavWebview.m in Sources */,
