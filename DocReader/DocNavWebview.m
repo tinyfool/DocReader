@@ -12,7 +12,13 @@
 
 @implementation DocNavWebview
 @synthesize docNavWebviewDelegate;
-@synthesize canNotSpeaking;
+
+
+-(BOOL)canNotSpeak {
+
+    NSResponder *firstResponder = [[NSApp keyWindow] firstResponder];
+    return firstResponder == inPageSearchField;
+}
 
 -(TDBarView*)inPageSearchViewController {
     
@@ -77,17 +83,6 @@
 -(IBAction)inPageSearchNext:(id)sender {
 
     [self searchFor:inPageSearchWord direction:YES caseSensitive:NO wrap:YES];
-}
-
-- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor {
-    
-    canNotSpeaking = YES;
-    return YES;
-}
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
-
-    canNotSpeaking = NO;
-    return YES;
 }
 
 -(float)zoomLevel {

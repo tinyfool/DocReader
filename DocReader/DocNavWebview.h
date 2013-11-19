@@ -21,12 +21,10 @@
     IBOutlet NSView* catalogBar;
     IBOutlet NSView* inPageSearchBar;
     IBOutlet NSSearchField* inPageSearchField;
-    BOOL canNotSpeaking;
     NSString* inPageSearchWord;
 }
 
 @property id<DocNavWebviewDelegate> docNavWebviewDelegate;
-@property BOOL canNotSpeaking;
 
 -(TDBarView*)inPageSearchViewController;
 -(IBAction)showSearch:(id)sender;
@@ -39,6 +37,8 @@
 -(IBAction)zoomIn:(id)sender;
 -(IBAction)zoomOut:(id)sender;
 -(IBAction)resetZoom:(id)sender;
+
+-(BOOL)canNotSpeak;
 @end
 
 @protocol DocNavWebviewDelegate <NSObject>

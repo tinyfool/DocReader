@@ -31,7 +31,7 @@
         return;
     }
     
-    if (webview.canNotSpeaking) {
+    if ([webview canNotSpeak]) {
         return;
     }
     
