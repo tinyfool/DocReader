@@ -231,6 +231,12 @@
         DocSet* docset = [result objectForKey:@"DocSet"];
         [lineData setObject:result forKey:docset.name];
     }
+    [cResults sortUsingComparator:^NSComparisonResult(NSDictionary* dict1, NSDictionary* dict2) {
+        
+        NSString* tokenName1 = [[[dict1 allValues] lastObject] objectForKey:@"ZTOKENNAME"];
+        NSString* tokenName2 = [[[dict2 allValues] lastObject] objectForKey:@"ZTOKENNAME"];
+        return [@(tokenName1.length) compare:@(tokenName2.length)];
+    }];
     return cResults;
 }
 
